@@ -32,6 +32,8 @@ function findArrayElIdByLabel(array, label) {
   };
 };
 
+// fc to create a whole tooltip above the synset; truncates long synsets
+// amount of info settable by modifying lines variable
 function drawTooltip(entry, nodde) { // nodde is just the parent node, but to avoid confusion with node()
   var node = d3.select(nodde),
   group = node.append("g"),
@@ -39,6 +41,8 @@ function drawTooltip(entry, nodde) { // nodde is just the parent node, but to av
   i = 0;
   var text = group.append("text");
 
+  // this throws an exception if entry.synset is undefined.. 
+  // but that would matter only if a tooltip were to be on category nodes
   while (entry.synset[i]) {
     synsteLine += entry.synset[i].name
     i++;
@@ -80,8 +84,6 @@ function drawTooltip(entry, nodde) { // nodde is just the parent node, but to av
 }
 
 function destroyTooltip(node) {
-  // console.log(d3.select(node))
-  // d3.select(node).remove();
   $("#tooltip").remove();
 }
 
@@ -89,36 +91,6 @@ function destroyTooltip(node) {
 // not very generic tho
 // direction is whether tree will be y-down or y-up (1 for down, -1 for up)
 function drawTree(canvas, nodes, links, diagonal, direction) {
-  // var tipSynset = d3.tip()
-  //   .attr("class", "d3-tip")
-  //   .html(function(d) {
-  //     return d.name;
-  //   })
-
-  // canvas.call(tipSynset);
-
-  // Define the div for the tooltip
-  // var div = d3.select("body").append("div") 
-  //   .attr("class", "tooltip")       
-  //   .style("opacity", 0);
-  var nfoTipG = canvas.append("g")
-    .attr("visibility", "hidden");
-
-  var nfoTipBg = nfoTipG.append("rect")
-    .attr("height", "0")
-    .attr("width", "0")
-    .style("fill", "#888")
-    .attr("x", 0)
-    .attr("y", 0);
-
-  var nfoTipTxt = nfoTipG.append("text")
-    .attr("class", "tooltipText")
-    .attr("id", "ttltip1");
-
-  // var nfoTipDiv = d3.select("WNTree").append("div")
-  //   .text("shit")
-  //   .style("opacity", 0)
-  //   .attr("id", "treeTooltip");
 
   // data binding, ha! (creates the lines between nodes)
   // select all el. with class .link (there are none yet), use data to create them 
@@ -162,10 +134,6 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
     .attr("r", 4)
     .attr("fill", "red");  
 
-  // var tooltip = node.append("g");
-
-  console.log(node[0][i])
-  
   var nodeText = node.append("text")
     .attr("text-anchor", "middle")
     .attr("dy", "1.3em") // shift it a bit
@@ -173,15 +141,10 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
     .attr("dy", "1.2em")
     .text(function(d) {
       if (d.synset) {
-        // console.log(d.synset);
         return d.synset[0].name + ":" + d.synset[0].meaning;
       }
       return d.name;
     })
-
-  // node.append(function(d, i) {
-  //   drawTooltip(d, node[0][i]);
-  // })
 
   node
     .on("mouseover", function(d, i) {
@@ -190,87 +153,7 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
     .on("mouseout", function(d, i) {
       destroyTooltip();
     })
-
-    // nodeText
-    //   .on("mouseover", function(d) {
-    //     if (d.synset) {
-    //       console.log(drawTooltip(d.synset));
-    //       var i = 0;
-
-    //       // array tooltipTexts holds all the lines in the tooltip
-    //       var tooltipTexts = [];
-    //       tooltipTexts[0] = "";
-    //       while (d.synset[i]) {
-    //         tooltipTexts[0] += d.synset[i].name + ", "
-    //         i++;
-    //       }
-    //       // remove the last comma and trim
-    //       tooltipTexts[0] = tooltipTexts[0].substring(0, tooltipTexts[0].length-2)
-    //       if (tooltipTexts[0].length > 35 ) {
-    //         tooltipTexts[0] = tooltipTexts[0].substring(0,36) + "…";
-    //       }
-
-    //       if (d.def.length > 35) {
-    //         tooltipTexts[1] = d.def.substring(0,36) + "…"
-    //       }
-    //       else {
-    //         tooltipTexts[1] = d.def;
-    //       }
-
-    //       tooltipTexts[2] = d.id
-
-    //       var longestTtpText = tooltipTexts.reduce(function (a, b) { return a.length > b.length ? a : b; });
-
-    //       var nfoWidth = longestTtpText.length;
-    //       var nfoHeight = 20 * tooltipTexts.length;
-    //       console.log(nfoWidth);
-    //       nfoTipG
-    //         .attr("transform", "translate(" + ((direction * d.y) - nfoWidth/2) + ", " + (d.x - (nfoHeight + 10)) + ")");
-          
-    //       i = 0;
-    //       while(tooltipTexts[i]) {
-    //         nfoTipTxt.append("tspan")
-    //           .attr("x", "0")
-    //           .attr("dy", "1.2em")
-    //           .attr("class", "ttpLine-" + i)
-    //           .text(tooltipTexts[i]);
-    //         i++;
-    //       }
-
-    //       nfoTipG
-    //         .attr("visibility", "visible");
-
-    //       nfoTipBg
-    //         .transition()
-    //         .duration(200)
-    //         .attr("width", (nfoWidth * 0.6) + "em")
-    //         .attr("height", nfoHeight)
-    //         .attr("class", "tooltipBox");
-
-    //      }
-    //     })
-    //   .on("mouseout", function(d) {
-    //     nfoTipBg
-    //     .transition()
-    //       .duration(600)
-    //       .attr("width", "0")
-    //       .attr("height", "0")
-        
-    //     nfoTipG
-    //       .attr("visibility", "hidden");
-
-    //     nfoTipTxt.selectAll("tspan").remove();
-    //   })
-    
-
-  // nodeText.append("")
-
-  // nodeText.append("tspan")
-  //   .attr("x", "0")
-  //   .attr("dy", "1.2em")
-  //   .text("blah");
 }
-// var element = $("#WNTree");
 
 function WNTree() 
 {
@@ -303,18 +186,7 @@ function WNTree()
   // planting the trees, defining their sizes
   // note that width left-to-right trees, width is actually height and vice versa
   tree = d3.layout.tree().size([treeSizes.height, treeSizes.width-treeSizes.width*0.15]);
-  // tree = d3.layout.tree().size([500,canvasSizes.height]);
   hyperTree = d3.layout.tree().size([treeSizes.height, treeSizes.width/6])
-  // hyperTree = d3.layout.tree().size([500,canvasSizes.height])
-
-
-  // d3.json("kolo_2.json", function(data2) {
-  //   var nodes2 = tree.nodes(data2);
-  //   console.log(nodes2);
-
-  // });
-
-
 
   // load the json
   d3.json("kolo.json", function(data) {

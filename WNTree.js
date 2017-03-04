@@ -32,13 +32,58 @@ function findArrayElIdByLabel(array, label) {
   };
 };
 
-// function drawTooltip(lines, x, y) {
-//   return True;
-// }
+function drawTooltip(entry, nodde) { // nodde is just the parent node, but to avoid confusion with node()
+  var node = d3.select(nodde),
+  group = node.append("g"),
+  synsteLine = "", 
+  i = 0;
+  var text = group.append("text");
 
-// function tooltipTextArr() {
-//   return True;
-// }
+  while (entry.synset[i]) {
+    synsteLine += entry.synset[i].name
+    i++;
+    if (entry.synset[i] && synsteLine.length < 35) {
+      synsteLine += ", "
+    }
+    else if (entry.synset[i]) {
+      synsteLine += "…"
+      break;
+    }
+    else {
+      break;
+    };
+  };
+  // return synsteLine;
+
+  var lines = [synsteLine, entry.id, entry.pos, entry.def]
+
+  for (i in lines) {
+    text.append("tspan")
+      .attr("x", "0")
+      .attr("dy", "1.2em")
+      .text(lines[i]);
+  }
+  // console.log(entry.synset[0].name);
+
+  textBBox = text.node().getBBox();
+
+  group.insert("rect", "text")
+    .attr("width", textBBox.width)
+    .attr("height", textBBox.height)
+    .attr("fill", "#999");
+  // console.log(text.node().getBBox());
+
+  group
+    .attr("transform", "translate(" + -textBBox.width/2 + "," + -(textBBox.height + 10) + ")")
+    .attr("id", "tooltip");
+  return group;
+}
+
+function destroyTooltip(node) {
+  // console.log(d3.select(node))
+  // d3.select(node).remove();
+  $("#tooltip").remove();
+}
 
 // attempt to generalize drawing of the tree
 // not very generic tho
@@ -115,13 +160,15 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
 
   node.append("circle")
     .attr("r", 4)
-    .attr("fill", "red");
+    .attr("fill", "red");  
 
+  // var tooltip = node.append("g");
+
+  console.log(node[0][i])
+  
   var nodeText = node.append("text")
     .attr("text-anchor", "middle")
-    .attr("dy", "1.3em"); // shift it a bit
-
-  nodeText.append("tspan")
+    .attr("dy", "1.3em") // shift it a bit
     .attr("x", "0")
     .attr("dy", "1.2em")
     .text(function(d) {
@@ -130,78 +177,90 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
         return d.synset[0].name + ":" + d.synset[0].meaning;
       }
       return d.name;
-    });
+    })
 
-    nodeText
-      .on("mouseover", function(d) {
-        if (d.synset) {
-          // drawTooltip(d.synset)
-          var i = 0;
+  // node.append(function(d, i) {
+  //   drawTooltip(d, node[0][i]);
+  // })
 
-          // array tooltipTexts holds all the lines in the tooltip
-          var tooltipTexts = [];
-          tooltipTexts[0] = "";
-          while (d.synset[i]) {
-            tooltipTexts[0] += d.synset[i].name + ", "
-            i++;
-          }
-          // remove the last comma and trim
-          tooltipTexts[0] = tooltipTexts[0].substring(0, tooltipTexts[0].length-2)
-          if (tooltipTexts[0].length > 35 ) {
-            tooltipTexts[0] = tooltipTexts[0].substring(0,36) + "…";
-          }
+  node
+    .on("mouseover", function(d, i) {
+      drawTooltip(d, node[0][i]);
+    })
+    .on("mouseout", function(d, i) {
+      destroyTooltip();
+    })
 
-          if (d.def.length > 35) {
-            tooltipTexts[1] = d.def.substring(0,36) + "…"
-          }
-          else {
-            tooltipTexts[1] = d.def;
-          }
+    // nodeText
+    //   .on("mouseover", function(d) {
+    //     if (d.synset) {
+    //       console.log(drawTooltip(d.synset));
+    //       var i = 0;
 
-          tooltipTexts[2] = d.id
+    //       // array tooltipTexts holds all the lines in the tooltip
+    //       var tooltipTexts = [];
+    //       tooltipTexts[0] = "";
+    //       while (d.synset[i]) {
+    //         tooltipTexts[0] += d.synset[i].name + ", "
+    //         i++;
+    //       }
+    //       // remove the last comma and trim
+    //       tooltipTexts[0] = tooltipTexts[0].substring(0, tooltipTexts[0].length-2)
+    //       if (tooltipTexts[0].length > 35 ) {
+    //         tooltipTexts[0] = tooltipTexts[0].substring(0,36) + "…";
+    //       }
 
-          var longestTtpText = tooltipTexts.reduce(function (a, b) { return a.length > b.length ? a : b; });
+    //       if (d.def.length > 35) {
+    //         tooltipTexts[1] = d.def.substring(0,36) + "…"
+    //       }
+    //       else {
+    //         tooltipTexts[1] = d.def;
+    //       }
 
-          var nfoWidth = longestTtpText.length;
-          var nfoHeight = 20 * tooltipTexts.length;
-          console.log(nfoWidth);
-          nfoTipG
-            .attr("transform", "translate(" + ((direction * d.y) - nfoWidth/2) + ", " + (d.x - (nfoHeight + 10)) + ")");
+    //       tooltipTexts[2] = d.id
+
+    //       var longestTtpText = tooltipTexts.reduce(function (a, b) { return a.length > b.length ? a : b; });
+
+    //       var nfoWidth = longestTtpText.length;
+    //       var nfoHeight = 20 * tooltipTexts.length;
+    //       console.log(nfoWidth);
+    //       nfoTipG
+    //         .attr("transform", "translate(" + ((direction * d.y) - nfoWidth/2) + ", " + (d.x - (nfoHeight + 10)) + ")");
           
-          i = 0;
-          while(tooltipTexts[i]) {
-            nfoTipTxt.append("tspan")
-              .attr("x", "0")
-              .attr("dy", "1.2em")
-              .attr("class", "ttpLine-" + i)
-              .text(tooltipTexts[i]);
-            i++;
-          }
+    //       i = 0;
+    //       while(tooltipTexts[i]) {
+    //         nfoTipTxt.append("tspan")
+    //           .attr("x", "0")
+    //           .attr("dy", "1.2em")
+    //           .attr("class", "ttpLine-" + i)
+    //           .text(tooltipTexts[i]);
+    //         i++;
+    //       }
 
-          nfoTipG
-            .attr("visibility", "visible");
+    //       nfoTipG
+    //         .attr("visibility", "visible");
 
-          nfoTipBg
-            .transition()
-            .duration(200)
-            .attr("width", (nfoWidth * 0.6) + "em")
-            .attr("height", nfoHeight)
-            .attr("class", "tooltipBox");
+    //       nfoTipBg
+    //         .transition()
+    //         .duration(200)
+    //         .attr("width", (nfoWidth * 0.6) + "em")
+    //         .attr("height", nfoHeight)
+    //         .attr("class", "tooltipBox");
 
-         }
-        })
-      .on("mouseout", function(d) {
-        nfoTipBg
-        .transition()
-          .duration(600)
-          .attr("width", "0")
-          .attr("height", "0")
+    //      }
+    //     })
+    //   .on("mouseout", function(d) {
+    //     nfoTipBg
+    //     .transition()
+    //       .duration(600)
+    //       .attr("width", "0")
+    //       .attr("height", "0")
         
-        nfoTipG
-          .attr("visibility", "hidden");
+    //     nfoTipG
+    //       .attr("visibility", "hidden");
 
-        nfoTipTxt.selectAll("tspan").remove();
-      })
+    //     nfoTipTxt.selectAll("tspan").remove();
+    //   })
     
 
   // nodeText.append("")

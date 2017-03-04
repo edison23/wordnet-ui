@@ -258,7 +258,7 @@ function WNTree()
 
 
   // load the json
-  d3.json("kolo_2.json", function(data) {
+  d3.json("kolo.json", function(data) {
     // get the hyperonyms node before deleting
     var hyperonyms = getArrayElsByLabel(data.children, "hyperCat");
     delArrayElByLabel(data.children, "hyperCat", 1);

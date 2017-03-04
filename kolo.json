@@ -1,0 +1,318 @@
+{
+    "id": "ENG20-0XXXXXX-n",
+    "pos": "N",
+    "def": "jednostopý dopravní prostředek pohybující se šlapáním do pedálů",
+    "synset": [
+        {
+            "name": "kolo",
+            "meaning": "2"
+        },
+        {
+            "name": "jízdní kolo",
+            "meaning": "1"
+        },
+        {
+            "name": "bicykl",
+            "meaning": "1"
+        }
+    ],
+    "path": [
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "entita",
+            "meaning": "1"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "objekt",
+            "meaning": "1"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "celek",
+            "meaning": "1"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "artefakt",
+            "meaning": "1"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "vybavení",
+            "meaning": "2"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "aparát",
+            "meaning": "1"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "ústrojí",
+            "meaning": "2"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "mechanické zařízení",
+            "meaning": "1"
+        },
+        {
+            "id": "ENG20-0XXXXXX-n",
+            "name": "jednoduchý stroj",
+            "meaning": "1"
+        }
+    ],
+    "children": [
+        {
+            "name": "mero/part",
+            "children": [
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "kolo bicyklu",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "kolečko",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-02734941-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "šlapadlo",
+                            "meaning": "1"
+                        },
+                        {
+                            "name": "pedal",
+                            "meaning": "1"
+                        },
+                        {
+                            "name": "slapka",
+                            "meaning": "2"
+                        },
+                        {
+                            "name": "další slovo",
+                            "meaning": "2"
+                        },
+                        {
+                            "name": "geleiserinenreinigerwitwe",
+                            "meaning": "2"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "řídítka",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-02734941-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "sedlo",
+                            "meaning": "2"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "řetěz",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "řetěz",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "řetěz",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "řetěz",
+                            "meaning": "1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "hyperCat",
+            "children": [
+                {
+                    "name": "hyperonym",
+                    "children": [
+                        {
+                            "id": "ENG20-0XXXXXX-n",
+                            "pos": "N",
+                            "def": "nejaka definice",
+                            "synset": [
+                                {
+                                    "name": "kolove vozidlo",
+                                    "meaning": "1"
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ENG20-0XXXXXX-n",
+                            "pos": "N",
+                            "def": "nejaka definice",
+                            "synset": [
+                                {
+                                    "name": "stroj smrti",
+                                    "meaning": "1"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "hyponyms",
+            "children": [
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "horské kolo",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "velocipéd",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "tandem",
+                            "meaning": "1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "near_antonym",
+            "children": [
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "auto",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "traktor",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "letadlo",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "chozeni",
+                            "meaning": "1"
+                        }
+                    ]
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "pos": "N",
+                    "def": "nejaka definice",
+                    "synset": [
+                        {
+                            "name": "hyperonym",
+                            "meaning": "1"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

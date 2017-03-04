@@ -1,0 +1,177 @@
+div {
+	/*border: 1px solid black;*/
+}
+
+.no-margin {
+	margin: 0px;
+}
+
+.no-padding {
+	padding: 0px;
+}
+
+.sem-rels {
+	margin-bottom: 2em;
+}
+
+.sem-rels .head {
+	background: #96D38D;
+	color: #631145;
+}
+
+/* specific */
+
+#search {
+	margin-bottom: 2em;
+}
+
+#header {
+	padding: 3em 0 3em 0;
+	color: #631145;
+}
+
+#repres {
+	margin-bottom: 1.5em;
+}
+
+#WNTree {
+	display: none;
+	width: 100%;
+	position: relative;
+}
+
+#treeTooltip {
+	position: absolute;
+}
+
+.tooltipText {
+	font-size: 0.9em;
+	text-anchor: left;
+	alignment-baseline: central;
+}
+
+.ttpLine-0 {
+	font-weight: 800;
+}
+
+/* breadcrumbs */
+/** The Magic **/
+.btn-breadcrumb .btn:not(:last-child):after {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 17px solid transparent;
+	border-bottom: 17px solid transparent;
+	border-left: 10px solid white;
+	position: absolute;
+	top: 50%;
+	margin-top: -17px;
+	left: 100%;
+	z-index: 3;
+}
+.btn-breadcrumb .btn:not(:last-child):before {
+	content: " ";
+	display: block;
+	width: 0;
+	height: 0;
+	border-top: 17px solid transparent;
+	border-bottom: 17px solid transparent;
+	border-left: 10px solid rgb(173, 173, 173);
+	position: absolute;
+	top: 50%;
+	margin-top: -17px;
+	margin-left: 1px;
+	left: 100%;
+	z-index: 3;
+}
+
+/** The Spacing **/
+.btn-breadcrumb .btn {
+	padding:6px 12px 6px 24px;
+}
+.btn-breadcrumb .btn:first-child {
+	padding:6px 6px 6px 10px;
+}
+.btn-breadcrumb .btn:last-child {
+	padding:6px 18px 6px 24px;
+}
+
+/** Default button **/
+.btn-breadcrumb .btn.btn-default:not(:last-child):after {
+	border-left: 10px solid #fff;
+}
+.btn-breadcrumb .btn.btn-default:not(:last-child):before {
+	border-left: 10px solid #ccc;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):after {
+	border-left: 10px solid #ebebeb;
+}
+.btn-breadcrumb .btn.btn-default:hover:not(:last-child):before {
+	border-left: 10px solid #adadad;
+}
+/*
+.color-primary-0 { color: #852C64 }
+.color-primary-1 { color: #C785AE }
+.color-primary-2 { color: #A65387 }
+.color-primary-3 { color: #631145 }
+.color-primary-4 { color: #42002A }
+
+.color-secondary-1-0 { color: #3C8D2F }
+.color-secondary-1-1 { color: #96D38D }
+.color-secondary-1-2 { color: #64B058 }
+.color-secondary-1-3 { color: #1E6912 }
+.color-secondary-1-4 { color: #0A4600 }
+
+.color-secondary-2-0 { color: #AAA839 }
+.color-secondary-2-1 { color: #FFFDAA }
+.color-secondary-2-2 { color: #D4D26A }
+.color-secondary-2-3 { color: #807D15 }
+.color-secondary-2-4 { color: #555300 }
+*/
+/*.active {
+	background: #852C64 !important;
+}
+
+a {
+	color: #42002A;
+}*/
+
+/* circles */
+/*.node {
+  cursor: pointer;
+}
+
+.node:hover {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node--leaf {
+  fill: white;
+}
+
+text {
+  font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-anchor: middle;
+  pointer-events: none;
+}
+
+.label,
+.node--root,
+.node--leaf {
+  pointer-events: none;
+}*/
+
+div.tooltip {	
+    position: absolute;			
+    text-align: center;			
+    width: 60px;					
+    height: 28px;					
+    padding: 2px;				
+    font: 12px sans-serif;		
+    background: lightsteelblue;	
+    border: 0px;		
+    border-radius: 8px;			
+    pointer-events: none;			
+}

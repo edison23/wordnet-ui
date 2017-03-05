@@ -134,7 +134,7 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
 
   node.append("circle")
     .attr("r", 4)
-    .attr("fill", "red");  
+    .attr("fill", "#777"); 
 
   var nodeText = node.append("text")
     .attr("text-anchor", "middle")

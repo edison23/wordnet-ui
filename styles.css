@@ -40,18 +40,8 @@ div {
 	position: relative;
 }
 
-#treeTooltip {
-	position: absolute;
-}
-
-.tooltipText {
-	font-size: 0.9em;
-	text-anchor: left;
-	alignment-baseline: central;
-}
-
-.ttpLine-0 {
-	font-weight: 800;
+#ttpBg {
+	fill: rgba(200, 200, 200, 0.7);
 }
 
 /* breadcrumbs */

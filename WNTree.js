@@ -39,7 +39,8 @@ function drawTooltip(entry, nodde) { // nodde is just the parent node, but to av
   group = node.append("g"),
   synsteLine = "", 
   i = 0;
-  var text = group.append("text");
+  var text = group.append("text")
+    .attr("transform", "translate(5, 5)");
 
   // this throws an exception if entry.synset is undefined.. 
   // but that would matter only if a tooltip were to be on category nodes
@@ -67,16 +68,17 @@ function drawTooltip(entry, nodde) { // nodde is just the parent node, but to av
       .attr("dy", "1.2em")
       .text(lines[i]);
   }
-  // console.log(entry.synset[0].name);
 
   textBBox = text.node().getBBox();
 
   group.insert("rect", "text")
-    .attr("width", textBBox.width)
-    .attr("height", textBBox.height)
-    .attr("fill", "#999");
-  // console.log(text.node().getBBox());
+    .attr("width", textBBox.width + 10)
+    .attr("height", textBBox.height + 10)
+    .attr("id", "ttpBg")
 
+  // group.insert("defs", "text")
+  //   .insert("filter", "defs")
+  //   .insert
   group
     .attr("transform", "translate(" + -textBBox.width/2 + "," + -(textBBox.height + 10) + ")")
     .attr("id", "tooltip");
@@ -103,16 +105,16 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
     .attr("fill", "none")
     .attr("stroke-width", "3")
     .attr("stroke", function(d) {
-      if (d.target.name == "mero/part") {
-        return "#b74343";;
+      if ((d.target.name || d.source.name) == "mero/part") {
+        return "#b74343";
       }
-      if (d.target.name == "hyponyms") {
+      if ((d.target.name || d.source.name) == "hyponyms") {
         return "#b79443";
       }
-      if (d.target.name == "hyperonym") {
+      if ((d.target.name || d.source.name) == "hyperonym") {
         return "#58b743";
       }
-      if (d.target.name == "near_antonym") {
+      if ((d.target.name || d.source.name) == "near_antonym") {
         return "#4370b7";
       }
       else {

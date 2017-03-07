@@ -16,51 +16,98 @@
             "meaning": "1"
         }
     ],
-    "path": [
+    "paths": [
         {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "entita",
-            "meaning": "1"
+            "name": "path-1",
+            "breadcrumbs":
+            [
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "entita",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "objekt",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "celek",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "artefakt",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "vybavení",
+                    "meaning": "2"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "kontejner",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "kolové vozidlo",
+                    "meaning": "1"
+                }
+            ]
         },
         {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "objekt",
-            "meaning": "1"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "celek",
-            "meaning": "1"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "artefakt",
-            "meaning": "1"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "vybavení",
-            "meaning": "2"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "aparát",
-            "meaning": "1"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "ústrojí",
-            "meaning": "2"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "mechanické zařízení",
-            "meaning": "1"
-        },
-        {
-            "id": "ENG20-0XXXXXX-n",
-            "name": "jednoduchý stroj",
-            "meaning": "1"
+            "name": "path-2",
+            "breadcrumbs":
+            [
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "entita",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "objekt",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "celek",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "artefakt",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "vybavení",
+                    "meaning": "2"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "aparát",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "ústrojí",
+                    "meaning": "2"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "mechanické zařízení",
+                    "meaning": "1"
+                },
+                {
+                    "id": "ENG20-0XXXXXX-n",
+                    "name": "jednoduchý stroj",
+                    "meaning": "1"
+                }
+            ]
         }
     ],
     "children": [

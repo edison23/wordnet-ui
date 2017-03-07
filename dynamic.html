@@ -10,8 +10,8 @@
 		<link rel="stylesheet" href="styles.css">
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
-		<!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
-		<!-- <script type="text/javascript" src="WNTree.js"></script> -->
+		<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+		<script type="text/javascript" src="WNTree.js"></script>
 		<script type="text/javascript" src="populateHTML.js"></script>
 		<script>
 			$(document).ready( function() {
@@ -24,7 +24,7 @@
 				    	$("#WNTree").show();
 				    });
 
-				    populateHTML();
+				    // getData();
 				});
 		</script>
 	</head>
@@ -57,27 +57,27 @@
 					</div>
 					<div id="WNTree">
 						<script>
-						  	// WNTree("WNTree");
+						  	WNTree("WNTree");
 						</script>
 					</div>
 					<div id="theContent">
 						<div class="row-fluid">
 							<div class="col-xs-12">
-								<div class="row">
-									<div class="btn-group btn-breadcrumb" id="breadcrumb">
-							            <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a>
+								<div class="row" id="paths">
+									<!-- <div class="btn-group btn-breadcrumb" id="breadcrumbs-1"> -->
+							            <!-- <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a> -->
 							            <!-- <a href="#" class="btn btn-default">entita:1</a> -->
 							        </div>
 								</div>
-								<p class="display-3" id="theWord">
+								<p class="display-3" id="wordMain">
 									<!-- kolo -->
 								</p>
-								<div class="row small text-muted" id="wordPOS">
-									<div class="col-sm-3 col-xs-12">
+								<div class="row small text-muted">
+									<div class="col-sm-3 col-xs-12" id="wordPOS">
 										<!-- podstatné jméno (n) -->
 									</div>
 									<div class="col-sm-3 col-xs-12" id="wordID">
-										<!-- ENG20-02734941-n -->
+										<!-- ENG20-02734941-n --> 
 									</div>
 								</div>
 								<p class="lead" id="wordDef">
@@ -85,25 +85,13 @@
 								</p>
 							</div>
 						</div>
-						<div class="row-fluid">
-							<div class="sem-rels col-lg-4 col-md-6 col-xs-12">
-								<ul class="list-group">
-									<li class="list-group-item head">another term for <!-- kolo:1 --></li>
-									<!-- <li class="list-group-item">jízdní kolo</li> -->
+						<div class="row-fluid" id="semGroups">
+							<!-- <div class="sem-rels col-lg-4 col-md-6 col-xs-12">
+								<ul class="list-group" id="col-1">
+									<li class="list-group-item head">another term for kolo</li>
+									<li class="list-group-item">jízdní kolo</li>
 								</ul>
-							</div>
-							<div class="sem-rels col-lg-4 col-md-6 col-xs-12">
-								<ul class="list-group">
-									<li class="list-group-item head">parts of <!-- kolo:1 --></li>
-									<!-- <li class="list-group-item">kolo bicyklu</li> -->
-								</ul>
-							</div>
-							<div class="sem-rels col-lg-4 col-md-6 col-xs-12">
-								<ul class="list-group">
-									<li class="list-group-item head">instancies of <!-- kolo:1 --></li>
-									<!-- <li class="list-group-item">horské kolo</li> -->
-								</ul>
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>

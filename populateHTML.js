@@ -29,10 +29,14 @@ function populateHTML(word) {
 
 	
 	$.each(word.paths, function(i, path) {
-		$("#paths").append('<div class="btn-group btn-breadcrumb breadcrumbs" id="breadcrumbs-' + i + '">')
+		// $("#paths").append('<div class="btn-group btn-breadcrumb breadcrumbs" id="breadcrumbs-' + i + '">')
+		// $.each(path.breadcrumbs, function(j, breadcrumb) {
+		// 	$("#breadcrumbs-" + i).append('<a href="#" class="btn btn-default">' + breadcrumb.name + '</a>');
+		// })
+		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
-			$("#breadcrumbs-" + i).append('<a href="#" class="btn btn-default">' + breadcrumb.name + '</a>');
-		})
+			$("#breadcrumb-" + i).append('<a href="#">' + breadcrumb.name + '</a> > ');
+		});
 	})
 
 	$.each(word.children, function(i, relations) {

@@ -6,6 +6,16 @@ body {
 	font-weight: 200;
 }
 
+a {
+	color: #3f3f3f;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: inherit;
+}
+
+
 .c-std {
 	color: #3f3f3f;
 }
@@ -16,18 +26,27 @@ body {
 
 .ichi {
 	font-size: 4.5em;
+	margin: 0.2em 0em;
 }
 
 .nii {
 	font-size: 2.4em;
+	margin: 0.3em 0em;
 }
 
 .san {
 	font-size: 1.7em;
+	margin: 0.4em 0em;
 }
 
 .yon {
 	font-size: 1.2em;
+	margin: 0.4em 0em;
+}
+
+.go {
+	font-size: 1.0em;
+	margin: 0.4em 0em;
 }
 
 .b400 {
@@ -53,6 +72,10 @@ body {
 
 #header small {
 	font-size: 0.5em;
+}
+
+#sidebar {
+	margin-right: 2em;
 }
 
 #settings {
@@ -135,7 +158,7 @@ body {
 
 #wordMain {
 	font-weight: 400;
-	margin-bottom: 0.4em;
+	margin-bottom: 0.2em;
 }
 
 #wordDef {
@@ -144,4 +167,9 @@ body {
 
 #WNTree {
 	display: none;
+}
+
+.properties {
+	font-size: 0.8em;
+	margin-left: 1em;
 }

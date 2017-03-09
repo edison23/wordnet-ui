@@ -29,7 +29,7 @@ function populateHTML(word) {
 
 	
 	$.each(word.paths, function(i, path) {
-		$("#paths").append('<div class="btn-group btn-breadcrumb" id="breadcrumbs-' + i + '">')
+		$("#paths").append('<div class="btn-group btn-breadcrumb breadcrumbs" id="breadcrumbs-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
 			$("#breadcrumbs-" + i).append('<a href="#" class="btn btn-default">' + breadcrumb.name + '</a>');
 		})

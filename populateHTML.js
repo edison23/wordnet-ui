@@ -24,7 +24,28 @@ function populateHTML(word) {
 	// console.log(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html(word.id);
-	$("#wordMain").html(word.synset[0].name);
+	$.each(word.synset, function(i, synset) {
+		// JA TO JEBEM
+		// $("#wordMain").append(synset.name);
+		// if (($.trim($("#wordMain").text()).length < 11) && (i < word.synset.length-1)) {
+		// 	$("#wordMain").append(',');
+		// } 
+		// elif ($.trim($("#wordMain").text()).length > 11) {
+		// 	$("#wordMain").append('…');
+		// }
+		// console.log(i)
+		// $("#wordMain").append(synset.name);
+		// if (i < word.synset.length-1) {
+		// 	$("#wordMain").append(', ');
+		// }
+		if (i < word.synset.length-1) {
+			$("#wordMain").append(synset.name + ", ");
+		}
+		else {
+			$("#wordMain").append(synset.name);
+		}
+	});
+	// console.log($.trim($("#wordMain").text()).length);
 	$("#wordDef").html(word.def);
 
 	

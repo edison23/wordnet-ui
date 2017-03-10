@@ -27,7 +27,7 @@ body {
 		/*border-right: none !important;*/
 	}
 	html {
-		font-size: 23px;
+		font-size: 22px;
 	}
 	
 	body {
@@ -37,7 +37,7 @@ body {
 
 @media screen and (max-width: 544px) {
 	html {
-		font-size: 21px;
+		font-size: 18px;
 	}
 
 	body {
@@ -265,8 +265,14 @@ a:hover {
 }
 
 .properties {
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	margin-left: 1rem;
+}
+
+.breadcrumbs:not(:last-child){
+	padding-bottom: 0.2rem;
+	border-bottom: 1px solid #d7d7d7;
+	display: inline-block;
 }
 
 #semGroups {

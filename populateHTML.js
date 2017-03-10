@@ -60,12 +60,15 @@ function populateHTML(word) {
 		});
 	})
 
+	// <ul class="list-group" id="list-col-' + i + '">\n\
+     // <li class="list-group-item head" id="semGroups-head-' + i + '">\
+     // ' + relations.name + '</li>'
+			                 
 	$.each(word.children, function(i, relations) {
 		if (relations.name !== "hyperCat") {
-			$("#semGroups").append('<div class="sem-rels col-lg-4 col-md-6 col-xs-12" id="semGroup-' + i + '">\n\
-			                 <ul class="list-group" id="list-col-' + i + '">\n\
-			                 <li class="list-group-item head" id="semGroups-head-' + i + '">\
-			                 ' + relations.name + '</li>'
+			$("#semGroups > .row").append('<div class="sem-rels col-lg-4 col-md-6 col-xs-12" id="semGroup-' + i + '">\n\
+			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relations.name + '</h4>\n\
+			                 <ul class="list-group" id="list-col-' + i + '">\n'
 			                 );
 			$.each(relations.children, function(j, synsets) {
 				$('#list-col-' + i).append('<li class="list-group-item">' + synsets.synset[0].name + '</li>');

@@ -22,9 +22,9 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-	#main, .sem-rels > ul {
+	#wordStuff {
 		border-left: none !important;
-		border-right: none !important;
+		/*border-right: none !important;*/
 	}
 	html {
 		font-size: 23px;
@@ -42,6 +42,10 @@ body {
 
 	body {
 		padding: 5px;
+	}
+
+	.sem-rels {
+		border-left: none !important;
 	}
 }
 

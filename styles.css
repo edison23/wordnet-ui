@@ -1,9 +1,20 @@
+/*@font-face {
+	font-family: 'akrobat-regular';
+	src: url('akrobat-font/Akrobat-Regular.otf');
+}
+
+@font-face {
+	font-family: 'akrobat-extrathin';
+	src: url('akrobat-font/Akrobat-Regular.otf');
+}
+*/
+
 body {
-	font-family: 'nunitoextralight', sans-serif;
+	font-family: 'akrobat', sans-serif;
 	font-size: 20px;
 	color: #3f3f3f;
 	padding: 30px;
-	font-weight: 200;
+	font-weight: 400;
 }
 
 /*@media screen and (min-width: 1200px) {
@@ -68,18 +79,18 @@ a:hover {
 }
 
 .b400 {
-	/*font-weight: 400;*/
-	font-family: 'nunitoregular';
+	font-weight: 400;
+	/*font-family: 'nunitoregular';*/
 }
 
 .b600 {
-	/*font-weight: 600;*/
-	font-family: 'nunitobold';
+	font-weight: 600;
+	/*font-family: 'nunitobold';*/
 }
 
 .b800 {
-	/*font-weight: 800*/
-	font-family: 'nunitoextrabold';
+	font-weight: 800
+	/*font-family: 'nunitoextrabold';*/
 }
 
 

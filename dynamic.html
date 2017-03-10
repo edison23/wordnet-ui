@@ -36,17 +36,20 @@
 	</head>
 	<body>
 
-		<div class="container-fluid">
+		<div class="container" id="container">
 			<!-- header -->
-			<div class="row-fluid no-margin" id="header">
-				<h1 class="nii c-acc">Simply Wordnet. <small class="c-std">Blows your mind. Everytime. úůďťŇĎŮŘ</small></h1>
+			<div class="rowBlah" id="header">
+				<div class="col-12">
+					<h1 class="nii c-acc">Simply Wordnet. <small class="c-std">Blows your mind. Everytime. úůďťŇĎŮŘ</small></h1>
+				</div>
+				
 			</div>
 
 			<!-- wrapper row -->
-			<div class="row-fluid" id="wrapper">
+			<div class="rowBlah" id="wrapper">
 
 				<!-- sidebar -->
-				<div class="col-xs-12 col-sm-5 col-md-3 no-padding" id="sidebar">
+				<div class="col col-sm-12 col-md-4 col-lg-3" id="sidebar">
 
 					<!-- settings buttons -->
 					<div class="" id="settings">
@@ -74,7 +77,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-8" id="main">
+				<div class="col col-sm-12 col-md-8 col-lg-9" id="main">
 					
 					<div id="WNTree">
 						<script>
@@ -82,37 +85,38 @@
 						</script>
 					</div>
 					<div id="theContent">
-						<div class="">
-							<div class="col-xs-12">
-								<h2 class="ichi c-acc b400" id="wordMain">
-									<!-- kolo -->
-								</h2>
-								<p id="wordDef">
-									<!-- jednostopý dopravní prostředek pohybující se šlapáním do pedálů -->
-								</p>
-								<div class="row-fluid" id="paths">
-									<h3 class="go c-acc">
-										Paths to word
-									</h3>
-									<!-- <div class="btn-group btn-breadcrumb" id="breadcrumbs-1"> -->
-							            <!-- <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a> -->
-							            <!-- <a href="#" class="btn btn-default">entita:1</a> -->
-							        <!-- </div> -->
-								</div>
-								<div class="row-fluid" id="properties">
-									<h3 class="go c-acc">
-										Word properties
-									</h3>
-									<div class=" properties">
-										<div class="col-sm-3 col-xs-12" id="wordPOS">
-											<!-- podstatné jméno (n) -->
-										</div>
-										<div class="col-sm-3 col-xs-12" id="wordID">
-											<!-- ENG20-02734941-n --> 
-										</div>
+						<div id="wordStuff">
+							<h2 class="ichi c-acc b400" id="wordMain">
+								<!-- kolo -->
+							</h2>
+							<p id="wordDef">
+								<!-- jednostopý dopravní prostředek pohybující se šlapáním do pedálů -->
+							</p>
+							<div class="rowBlah" id="paths">
+								<h3 class="go c-acc">
+									Paths to word
+								</h3>
+								<!-- <div class="btn-group btn-breadcrumb" id="breadcrumbs-1"> -->
+						            <!-- <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a> -->
+						            <!-- <a href="#" class="btn btn-default">entita:1</a> -->
+						        <!-- </div> -->
+							</div>
+							<div class="rowBlah" id="wordProp">
+								<h3 class="go c-acc">
+									Word properties
+								</h3>
+								<div class="properties">
+									<div class="col-sm-3 col-xs-6" id="wordPOS">
+										<!-- podstatné jméno (n) -->
 									</div>
+									<div class="col-sm-3 col-xs-6" id="wordID">
+										<!-- ENG20-02734941-n --> 
+									</div>
+									<span>&nbsp;</span>
 								</div>
 							</div>
+						</div>
+						<div class="rowBlah">
 							<div class="col-xs-12" id="semGroups">
 								<h3 class="san c-acc b600">Semantic relations</h3>
 								<div class="row">

@@ -26,6 +26,8 @@
 				    	$("#WNTree").show();
 				    });
 
+				    $('[data-toggle="tooltip"]').tooltip(); 
+
 				    // getData();
 				});
 		</script>
@@ -46,9 +48,9 @@
 
 					<!-- settings buttons -->
 					<div class="" id="settings">
-						<a href="#" id="text-rep" class="btn btn-primary"></a>
-						<a href="#" id="dendr-rep" class="btn btn-primary"></a>
-						<a href="#" id="about" class="btn btn-primary"></a>
+						<a href="#" id="text-rep" class="btn btn-primary" data-toggle="tooltip" title="Textual"></a>
+						<a href="#" id="dendr-rep" class="btn btn-primary" data-toggle="tooltip" title="Tree"></a>
+						<a href="#" id="about" class="btn btn-primary" data-toggle="tooltip" title="About"></a>
 					</div>
 					<div class="input-group" id="search">
 						<input class="form-control" type="text" value="kolo">

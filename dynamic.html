@@ -8,6 +8,10 @@
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
 		<link rel="stylesheet" href="styles.css">
+		<!-- <link rel="stylesheet" href="nunito-webfont-2/stylesheet.css"> -->
+		<link rel="stylesheet" href="akrobat-webfont/akrobat-font.css">
+
+		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
 		<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
@@ -15,7 +19,7 @@
 		<script type="text/javascript" src="populateHTML.js"></script>
 		<script>
 			$(document).ready( function() {
-				    $("#normal-rep").click(function() {
+				    $("#text-rep").click(function() {
 				    	$("#WNTree").hide();
 				        $("#theContent").show();
 				    });
@@ -24,73 +28,105 @@
 				    	$("#WNTree").show();
 				    });
 
+				    $('[data-toggle="tooltip"]').tooltip(); 
+
 				    // getData();
 				});
 		</script>
 	</head>
 	<body>
 
-		<div class="container-fluid">
-			<div class="row-fluid no-margin" id="header">
-				<h1>Simply Wordnet. <small class="text-muted">For the first time.</small></h1>
+		<div class="container" id="container">
+			<!-- header -->
+			<div class="rowBlah" id="header">
+				<div class="col-12">
+					<h1 class="nii c-acc">Simply Wordnet. <small class="c-std">Blows your mind. Everytime. úůďťŇĎŮŘ</small></h1>
+				</div>
+				
 			</div>
-			<div class="row-fluid" id="wrapper">
-				<div class="col-xs-12 col-sm-5 col-md-3 no-padding" id="sidebar">
+
+			<!-- wrapper row -->
+			<div class="rowBlah" id="wrapper">
+
+				<!-- sidebar -->
+				<div class="col col-sm-12 col-md-4 col-lg-3" id="sidebar">
+
+					<!-- settings buttons -->
+					<div class="" id="settings">
+						<a href="#" id="text-rep" class="btn btn-primary" data-toggle="tooltip" title="Textual"></a>
+						<a href="#" id="dendr-rep" class="btn btn-primary" data-toggle="tooltip" title="Tree"></a>
+						<a href="#" id="about" class="btn btn-primary" data-toggle="tooltip" title="About"></a>
+					</div>
 					<div class="input-group" id="search">
 						<input class="form-control" type="text" value="kolo">
 						<span class="input-group-btn">
-					    	<button class="btn btn-default" type="submit">
-								<i class="fa fa-search" aria-hidden="true"></i>
+					    	<button class="btn btn-default" id="search-butt" type="submit">
+								<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
 					    	</button>
 					    </span>
 					</div>	
 					<div id="wordMeanings">
-						<div class="list-group">
-							<!-- <a href="#" class="list-group-item">[n] kolo:1</a> -->
+						<h2 class="yon b600 c-acc">Found synonym rings (synsets):</h2>
+						<div class="list-group" id="synsets">
+							<a href="#" class="list-group-item">[n] kolo:1</a>
+							<a href="#" class="list-group-item active">[n] jízdní kolo:1, bicykl:1, kolo:2</a>
+							<a href="#" class="list-group-item">[n] kružnice:1, kruh:1, kolo:3</a>
+							<a href="#" class="list-group-item">[n] kotouč:2, cívka:2, špulka:1, kolo:4</a>
+							<a href="#" class="list-group-item">[n] kolo:5, obruč:1</a>
+							<a href="#" class="list-group-item">[n] hra:1, kolo:6</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-7 col-md-9" id="main">
-					<div class="btn-group" id="repres">
-						<a href="#" id="normal-rep" class="btn btn-primary">Normal repr.</a>
-						<a href="#" id="dendr-rep" class="btn btn-primary">Dendrogram tree</a>
-					</div>
+				<div class="col col-sm-12 col-md-8 col-lg-9" id="main">
+					
 					<div id="WNTree">
 						<script>
 						  	WNTree("WNTree");
 						</script>
 					</div>
 					<div id="theContent">
-						<div class="row-fluid">
-							<div class="col-xs-12">
-								<div class="row" id="paths">
-									<!-- <div class="btn-group btn-breadcrumb" id="breadcrumbs-1"> -->
-							            <!-- <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a> -->
-							            <!-- <a href="#" class="btn btn-default">entita:1</a> -->
-							        </div>
-								</div>
-								<p class="display-3" id="wordMain">
-									<!-- kolo -->
-								</p>
-								<div class="row small text-muted">
-									<div class="col-sm-3 col-xs-12" id="wordPOS">
+						<div id="wordStuff">
+							<h2 class="ichi c-acc b400" id="wordMain">
+								<!-- kolo -->
+							</h2>
+							<p id="wordDef">
+								<!-- jednostopý dopravní prostředek pohybující se šlapáním do pedálů -->
+							</p>
+							<div class="rowBlah" id="paths">
+								<h3 class="go c-acc">
+									Paths to word
+								</h3>
+								<!-- <div class="btn-group btn-breadcrumb" id="breadcrumbs-1"> -->
+						            <!-- <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a> -->
+						            <!-- <a href="#" class="btn btn-default">entita:1</a> -->
+						        <!-- </div> -->
+							</div>
+							<div class="rowBlah" id="wordProp">
+								<h3 class="go c-acc">
+									Word properties
+								</h3>
+								<div class="properties">
+									<div class="col-sm-3 col-xs-6" id="wordPOS">
 										<!-- podstatné jméno (n) -->
 									</div>
-									<div class="col-sm-3 col-xs-12" id="wordID">
+									<div class="col-sm-3 col-xs-6" id="wordID">
 										<!-- ENG20-02734941-n --> 
 									</div>
+									<span>&nbsp;</span>
 								</div>
-								<p class="lead" id="wordDef">
-									<!-- jednostopý dopravní prostředek pohybující se šlapáním do pedálů -->
-								</p>
 							</div>
-							<div class="row-fluid" id="semGroups">
-								<!-- <div class="sem-rels col-lg-4 col-md-6 col-xs-12">
-									<ul class="list-group" id="col-1">
+						</div>
+						<div class="rowBlah">
+							<div class="col-xs-12" id="semGroups">
+								<h3 class="san c-acc b600">Semantic relations</h3>
+								<div class="row">
+								 <!-- <div class="sem-rels col-lg-4 col-md-6 col-xs-12" id=""> -->
+									<!-- <ul class="list-group" id="col-1">
 										<li class="list-group-item head">another term for kolo</li>
 										<li class="list-group-item">jízdní kolo</li>
-									</ul>
-								</div>-->
+									</ul> -->
+								<!-- </div> -->
+								</div>
 							</div>
 						</div>
 					</div>

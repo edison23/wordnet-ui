@@ -6,14 +6,15 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+		<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous"> -->
+		<link rel="stylesheet" href="bootstrap.min.css">
 		<link rel="stylesheet" href="styles.css">
 		<!-- <link rel="stylesheet" href="nunito-webfont-2/stylesheet.css"> -->
 		<link rel="stylesheet" href="akrobat-webfont/akrobat-font.css">
 
 		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+		<!-- <script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script> -->
 		<!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
 		<script type="text/javascript" src="WNTree.js"></script>
 		<script type="text/javascript" src="populateHTML.js"></script>
@@ -31,6 +32,7 @@
 				    $('[data-toggle="tooltip"]').tooltip(); 
 
 				    // getData();
+				    search();
 				});
 		</script>
 	</head>
@@ -68,12 +70,12 @@
 					<div id="wordMeanings">
 						<h2 class="yon b600 c-acc">Found synonym rings (synsets):</h2>
 						<div class="list-group" id="synsets">
-							<a href="#" class="list-group-item">[n] kolo:1</a>
+							<!-- <a href="#" class="list-group-item">[n] kolo:1</a>
 							<a href="#" class="list-group-item active">[n] jízdní kolo:1, bicykl:1, kolo:2</a>
 							<a href="#" class="list-group-item">[n] kružnice:1, kruh:1, kolo:3</a>
 							<a href="#" class="list-group-item">[n] kotouč:2, cívka:2, špulka:1, kolo:4</a>
 							<a href="#" class="list-group-item">[n] kolo:5, obruč:1</a>
-							<a href="#" class="list-group-item">[n] hra:1, kolo:6</a>
+							<a href="#" class="list-group-item">[n] hra:1, kolo:6</a> -->
 						</div>
 					</div>
 				</div>
@@ -92,14 +94,16 @@
 							<p id="wordDef">
 								<!-- jednostopý dopravní prostředek pohybující se šlapáním do pedálů -->
 							</p>
-							<div class="rowBlah" id="paths">
+							<div class="rowBlah">
 								<h3 class="go c-acc">
 									Paths to word
 								</h3>
+								<div  id="paths">
 								<!-- <div class="btn-group btn-breadcrumb" id="breadcrumbs-1"> -->
 						            <!-- <a href="#" class="btn btn-default"><i class="fa fa-home" aria-hidden="true"></i></a> -->
 						            <!-- <a href="#" class="btn btn-default">entita:1</a> -->
 						        <!-- </div> -->
+						        </div>
 							</div>
 							<div class="rowBlah" id="wordProp">
 								<h3 class="go c-acc">
@@ -117,9 +121,9 @@
 							</div>
 						</div>
 						<div class="rowBlah">
-							<div class="col-xs-12" id="semGroups">
+							<div class="col-xs-12">
 								<h3 class="san c-acc b600">Semantic relations</h3>
-								<div class="row">
+								<div class="row" id="semGroups">
 								 <!-- <div class="sem-rels col-lg-4 col-md-6 col-xs-12" id=""> -->
 									<!-- <ul class="list-group" id="col-1">
 										<li class="list-group-item head">another term for kolo</li>

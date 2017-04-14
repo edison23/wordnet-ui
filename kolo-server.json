@@ -1,0 +1,1470 @@
+				[
+					{
+						"id": "ENG20-03403613-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "kolo",
+								"meaning": "5"
+							},
+							{
+								"name": "obruč",
+								"meaning": "1"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00001740-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "entita",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00016236-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "objekt",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00002645-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "celek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00019244-n",
+										"def": "uměle vyrobený předmět zpracovaný výtvarně nebo účelově",
+										"synset": [
+											{
+												"name": "artefakt",
+												"meaning": "1"
+											},
+											{
+												"name": "výtvor",
+												"meaning": "2"
+											},
+											{
+												"name": "výrobek",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04172147-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "pruh",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02687362-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "pás",
+												"meaning": "1"
+											},
+											{
+												"name": "pásek",
+												"meaning": "2"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-02687362-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "pás",
+														"meaning": "1"
+													},
+													{
+														"name": "pásek",
+														"meaning": "2"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": [
+									{
+										"id": "ENG20-03687757-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "nosní kroužek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03937995-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ráfek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04269070-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "obutí",
+												"meaning": "2"
+											},
+											{
+												"name": "plášť",
+												"meaning": "7"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "ENG20-14394085-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "hra",
+								"meaning": "1"
+							},
+							{
+								"name": "kolo",
+								"meaning": "6"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00020486-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "abstrakce",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00029305-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "množství",
+												"meaning": "1"
+											},
+											{
+												"name": "kvantum",
+												"meaning": "2"
+											},
+											{
+												"name": "kvantita",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-14394273-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "část zápasu",
+												"meaning": "1"
+											},
+											{
+												"name": "část hrací doby",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-14394273-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "část zápasu",
+														"meaning": "1"
+													},
+													{
+														"name": "část hrací doby",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": []
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "ENG20-00282200-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "kolo",
+								"meaning": "7"
+							},
+							{
+								"name": "okruh",
+								"meaning": "5"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00026194-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "akt",
+												"meaning": "1"
+											},
+											{
+												"name": "skutek",
+												"meaning": "1"
+											},
+											{
+												"name": "lidská činnost",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00032816-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "čin",
+												"meaning": "2"
+											},
+											{
+												"name": "akt",
+												"meaning": "4"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00180570-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "změna",
+												"meaning": "4"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00267271-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "pohyb",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00270493-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "lokomoce",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-00270493-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "lokomoce",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": []
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "ENG20-02759263-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "kotouč",
+								"meaning": "2"
+							},
+							{
+								"name": "cívka",
+								"meaning": "2"
+							},
+							{
+								"name": "špulka",
+								"meaning": "1"
+							},
+							{
+								"name": "kolo",
+								"meaning": "4"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00001740-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "entita",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00016236-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "objekt",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00002645-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "celek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00019244-n",
+										"def": "uměle vyrobený předmět zpracovaný výtvarně nebo účelově",
+										"synset": [
+											{
+												"name": "artefakt",
+												"meaning": "1"
+											},
+											{
+												"name": "výtvor",
+												"meaning": "2"
+											},
+											{
+												"name": "výrobek",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03443493-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "vybavení",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03068033-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "aparát",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03598777-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ústrojí",
+												"meaning": "2"
+											},
+											{
+												"name": "mechanizmus",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03597275-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "mechanické zařízení",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04408628-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "navíječ",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-04408628-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "navíječ",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": [
+									{
+										"id": "ENG20-04050919-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "člunek",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": []
+							}
+						]
+					},
+					{
+						"id": "ENG20-13087394-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "kružnice",
+								"meaning": "1"
+							},
+							{
+								"name": "kruh",
+								"meaning": "1"
+							},
+							{
+								"name": "kolo",
+								"meaning": "3"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00020486-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "abstrakce",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00027563-n",
+										"def": "nezbytná, neodlučitelná, podstatná vlastnost něčeho (věci, substance), podstatný znak",
+										"synset": [
+											{
+												"name": "atribut",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00023103-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "forma",
+												"meaning": "1"
+											},
+											{
+												"name": "tvar",
+												"meaning": "1"
+											},
+											{
+												"name": "podoba",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-13077185-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "figura",
+												"meaning": "5"
+											},
+											{
+												"name": "útvar",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-13077555-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "plošný obrazec",
+												"meaning": "1"
+											},
+											{
+												"name": "obrazec",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-13086903-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kuželosečka",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-13092009-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ovál",
+												"meaning": "1"
+											},
+											{
+												"name": "vajíčko",
+												"meaning": "4"
+											},
+											{
+												"name": "elipsa",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-13092009-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "ovál",
+														"meaning": "1"
+													},
+													{
+														"name": "vajíčko",
+														"meaning": "4"
+													},
+													{
+														"name": "elipsa",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": []
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": [
+									{
+										"id": "ENG20-13088240-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "oblouk",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "ENG20-02734941-n",
+						"pos": "n",
+						"def": "jednostopý dopravní prostředek pohybující se šlapáním do pedálů",
+						"synset": [
+							{
+								"name": "jízdní kolo",
+								"meaning": "1"
+							},
+							{
+								"name": "bicykl",
+								"meaning": "1"
+							},
+							{
+								"name": "kolo",
+								"meaning": "2"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00001740-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "entita",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00016236-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "objekt",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00002645-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "celek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00019244-n",
+										"def": "uměle vyrobený předmět zpracovaný výtvarně nebo účelově",
+										"synset": [
+											{
+												"name": "artefakt",
+												"meaning": "1"
+											},
+											{
+												"name": "výtvor",
+												"meaning": "2"
+											},
+											{
+												"name": "výrobek",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03443493-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "vybavení",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02982528-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kontejner",
+												"meaning": "1"
+											},
+											{
+												"name": "přepravník",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04398733-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kolové vozidlo",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-04398733-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "kolové vozidlo",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": [
+									{
+										"id": "ENG20-04348807-n",
+										"def": "zastarale jízdní kolo",
+										"synset": [
+											{
+												"name": "velociped",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03650657-n",
+										"def": "jednostopý dopravní prostředek jezdcem uváděný v pohyb šlapáním do pedálů",
+										"synset": [
+											{
+												"name": "horské kolo",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02735379-n",
+										"def": "závodní jízdní kolo pro dva",
+										"synset": [
+											{
+												"name": "tandem",
+												"meaning": "2"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": [
+									{
+										"id": "ENG20-04124787-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kolečko",
+												"meaning": "4"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02736143-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kolo bicyklu",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03359077-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "řídítka",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02736023-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "sedlo",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03756001-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "šlapadlo",
+												"meaning": "1"
+											},
+											{
+												"name": "pedál",
+												"meaning": "1"
+											},
+											{
+												"name": "šlapka",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02892416-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "řetěz",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "ENG20-04397539-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "kolo",
+								"meaning": "1"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00001740-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "entita",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00016236-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "objekt",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00002645-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "celek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00019244-n",
+										"def": "uměle vyrobený předmět zpracovaný výtvarně nebo účelově",
+										"synset": [
+											{
+												"name": "artefakt",
+												"meaning": "1"
+											},
+											{
+												"name": "výtvor",
+												"meaning": "2"
+											},
+											{
+												"name": "výrobek",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03443493-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "vybavení",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03068033-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "aparát",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03598777-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ústrojí",
+												"meaning": "2"
+											},
+											{
+												"name": "mechanizmus",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03597275-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "mechanické zařízení",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03562894-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "jednoduchý stroj",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-03562894-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "jednoduchý stroj",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": [
+									{
+										"id": "ENG20-03841483-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "hrnčířský kruh",
+												"meaning": "1"
+											},
+											{
+												"name": "kruh",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04124787-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kolečko",
+												"meaning": "4"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03305328-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ozubené kolo",
+												"meaning": "1"
+											},
+											{
+												"name": "soukolí",
+												"meaning": "1"
+											},
+											{
+												"name": "přehazovačka",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02680642-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "nepokoj",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04367010-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kolo od vozu",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02736143-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kolo bicyklu",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04386095-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "korečník",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03687893-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "příďové kolo",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-02868295-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "pneumatika",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03126936-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "hnací kolo",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-04385886-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "vodní kolo",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03333453-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "brusný kotouč",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03728086-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "lopatkové koleso",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": [
+									{
+										"id": "ENG20-03937995-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ráfek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03205369-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "obruč",
+												"meaning": "2"
+											}
+										]
+									}
+								]
+							}
+						]
+					},
+					{
+						"id": "ENG20-02923972-n",
+						"pos": "n",
+						"def": "",
+						"synset": [
+							{
+								"name": "kolo",
+								"meaning": "8"
+							}
+						],
+						"paths": [
+							{
+								"name": "path-1",
+								"breadcrumbs": [
+									{
+										"id": "ENG20-00001740-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "entita",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00016236-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "objekt",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00002645-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "celek",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-00019244-n",
+										"def": "uměle vyrobený předmět zpracovaný výtvarně nebo účelově",
+										"synset": [
+											{
+												"name": "artefakt",
+												"meaning": "1"
+											},
+											{
+												"name": "výtvor",
+												"meaning": "2"
+											},
+											{
+												"name": "výrobek",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03443493-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "vybavení",
+												"meaning": "2"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03068033-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "aparát",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03598777-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "ústrojí",
+												"meaning": "2"
+											},
+											{
+												"name": "mechanizmus",
+												"meaning": "1"
+											}
+										]
+									},
+									{
+										"id": "ENG20-03955976-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "otočný mechanizmus",
+												"meaning": "1"
+											},
+											{
+												"name": "točivý mechanizmus",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							}
+						],
+						"children": [
+							{
+								"name": "hyperCat",
+								"children": [
+									{
+										"name": "hypernym",
+										"children": [
+											{
+												"id": "ENG20-03955976-n",
+												"def": "",
+												"synset": [
+													{
+														"name": "otočný mechanizmus",
+														"meaning": "1"
+													},
+													{
+														"name": "točivý mechanizmus",
+														"meaning": "1"
+													}
+												]
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "hyponym",
+								"children": [
+									{
+										"id": "ENG20-03092016-n",
+										"def": "",
+										"synset": [
+											{
+												"name": "kotouč",
+												"meaning": "1"
+											},
+											{
+												"name": "disk",
+												"meaning": "2"
+											},
+											{
+												"name": "kolečko",
+												"meaning": "1"
+											}
+										]
+									}
+								]
+							},
+							{
+								"name": "near_antonym",
+								"children": []
+							},
+							{
+								"name": "part",
+								"children": []
+							}
+						]
+					}
+				]

@@ -1,8 +1,8 @@
 function getData(coalback, input) {
 	console.log(input)
 	$.ajax({
-	  // url: "kolo.json",
-	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
+	  url: "kolo-server.json",
+	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	    if (xhr.overrideMimeType)
 	    {
@@ -21,38 +21,55 @@ function getData(coalback, input) {
 }
 function search() {
 	var input = $("#search-input").val();
+	window.history.pushState(input, "Title", "?q=" + input)
 	getData(populateHTML.bind(null), input);
 }
 
-function populateHTML(word) {
-	// console.log(word);
-	$("#wordPOS").html(word.pos);
-	$("#wordID").html(word.id);
-	$.each(word.synset, function(i, synset) {
-		// JA TO JEBEM
-		// $("#wordMain").append(synset.name);
-		// if (($.trim($("#wordMain").text()).length < 11) && (i < word.synset.length-1)) {
-		// 	$("#wordMain").append(',');
-		// } 
-		// elif ($.trim($("#wordMain").text()).length > 11) {
-		// 	$("#wordMain").append('…');
-		// }
-		// console.log(i)
-		// $("#wordMain").append(synset.name);
-		// if (i < word.synset.length-1) {
-		// 	$("#wordMain").append(', ');
-		// }
-		if (i < word.synset.length-1) {
-			$("#wordMain").append(synset.name + ", ");
+function listSynsets(wordsArr) {
+	var list = $("#synsets");
+	list.empty()
+	for (i in wordsArr) {
+		// console.log(i, wordsArr[i])
+		list.append('<a href="#" class="list-group-item" id="synsetItem-' + i + '">' + synString(wordsArr[i].synset) + '</a>')
+		// .onclick(showWord(wordsArr[i]))
+		// $("#synsetItem-" + i).on()
+	}
+}
+
+function clickSynset() {
+	return false;
+}
+
+function populateHTML(wordsArr) {
+	console.log(wordsArr);
+	listSynsets(wordsArr);
+	showWord(wordsArr[3])
+}
+
+function synString(synset) {
+	var synString = "";
+	$.each(synset, function(i, synWord) {
+		console.log(i, synset.length)
+		if (i < synset.length - 1) {
+			comma = ", "
 		}
 		else {
-			$("#wordMain").append(synset.name);
+			comma = ""
 		}
+		synString += synWord.name + "<sup>" + synWord.meaning + "</sup>" + comma;
 	});
-	// console.log($.trim($("#wordMain").text()).length);
+	return synString;
+}
+
+function showWord(word) {
+	$("#wordPOS").html(word.pos);
+	$("#wordID").html(word.id);
+	$("#wordMain").html(synString(word.synset))
 	$("#wordDef").html(word.def);
 
-	
+	$("#paths").empty();
+	$("#semGroups").empty();
+
 	$.each(word.paths, function(i, path) {
 		// $("#paths").append('<div class="btn-group btn-breadcrumb breadcrumbs" id="breadcrumbs-' + i + '">')
 		// $.each(path.breadcrumbs, function(j, breadcrumb) {
@@ -60,9 +77,10 @@ function populateHTML(word) {
 		// })
 		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
-			$("#breadcrumb-" + i).append('<a href="#">' + breadcrumb.name + '</a> > ');
+			// $("#breadcrumb-" + i).append('<a href="#">' + breadcrumb.name + '</a> > ');
+			$("#breadcrumb-" + i).append('<a href="#">' + synString(breadcrumb.synset) + '</a> > ');
 		});
-	})
+	});
 
 	// <ul class="list-group" id="list-col-' + i + '">\n\
      // <li class="list-group-item head" id="semGroups-head-' + i + '">\
@@ -70,7 +88,7 @@ function populateHTML(word) {
 			                 
 	$.each(word.children, function(i, relations) {
 		if (relations.name !== "hyperCat") {
-			$("#semGroups > .row").append('<div class="sem-rels col-lg-4 col-md-6 col-sm-6 col-xs-12" id="semGroup-' + i + '">\n\
+			$("#semGroups").append('<div class="sem-rels col-lg-4 col-md-6 col-sm-6 col-xs-12" id="semGroup-' + i + '">\n\
 			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relations.name + '</h4>\n\
 			                 <ul class="list-group" id="list-col-' + i + '">\n'
 			                 );

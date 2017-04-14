@@ -14,7 +14,7 @@
 		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
-		<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+		<!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
 		<script type="text/javascript" src="WNTree.js"></script>
 		<script type="text/javascript" src="populateHTML.js"></script>
 		<script>
@@ -58,9 +58,9 @@
 						<a href="#" id="about" class="btn btn-primary" data-toggle="tooltip" title="About"></a>
 					</div>
 					<div class="input-group" id="search">
-						<input class="form-control" type="text" value="kolo">
+						<input id="search-input" class="form-control" type="text" value="kolo">
 						<span class="input-group-btn">
-					    	<button class="btn btn-default" id="search-butt" type="submit">
+					    	<button class="btn btn-default" id="search-butt" type="submit" onclick='search()'>
 								<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
 					    	</button>
 					    </span>

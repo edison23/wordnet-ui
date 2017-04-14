@@ -290,8 +290,12 @@ a:hover {
 	text-align: center;
 }
 
+#semGroups .yon {
+	margin: 0;
+}
+
 .sem-rels {
-	margin-top: 1.3rem;
+	margin-top: 0.8rem;
 	border-left: 1px solid #d7d7d7;
 }
 

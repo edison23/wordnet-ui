@@ -1,6 +1,8 @@
-function getData(coalback) {
+function getData(coalback, input) {
+	console.log(input)
 	$.ajax({
-	  url: "kolo.json",
+	  // url: "kolo.json",
+	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	    if (xhr.overrideMimeType)
 	    {
@@ -17,8 +19,10 @@ function getData(coalback) {
 	},
 	});
 }
-
-getData(populateHTML.bind(null));
+function search() {
+	var input = $("#search-input").val();
+	getData(populateHTML.bind(null), input);
+}
 
 function populateHTML(word) {
 	// console.log(word);

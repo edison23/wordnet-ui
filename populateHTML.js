@@ -21,35 +21,50 @@ function getData(coalback, input) {
 }
 function search() {
 	var input = $("#search-input").val();
-	window.history.pushState(input, "Title", "?q=" + input)
+	// window.history.pushState(input, "Title", "?q=" + input)
 	getData(populateHTML.bind(null), input);
 }
 
-function listSynsets(wordsArr) {
-	var list = $("#synsets");
-	list.empty()
-	for (i in wordsArr) {
-		// console.log(i, wordsArr[i])
-		list.append('<a href="#" class="list-group-item" id="synsetItem-' + i + '">' + synString(wordsArr[i].synset) + '</a>')
-		// .onclick(showWord(wordsArr[i]))
-		// $("#synsetItem-" + i).on()
-	}
+function parseURL(url) {
+	var uri = new URI(url)
+	parsedUrl = {}
+	parsedUrl["fragment"] = uri.fragment();
+	parsedUrl["query"] = uri.query();
+	return parseURL
 }
 
-function clickSynset() {
-	return false;
+function listSynsets(synsets) {
+	// var address = URI.parse(window.location.href);
+	// var query = URI.parseQuery(address.query);
+	// // console.log(URI.fragment(window.location.href));
+	// console.log(query)
+
+	var list = $("#synsets");
+	list.empty()
+	$.each(synsets, function(id, synset) {
+		list.append('<a href="#' + id + '" class="list-group-item" id="synsetItem-' + id + '">' + synString(synset.synset) + '</a>')
+		$("#synsetItem-" + id).click(function() {
+			showWord(synset)
+		})
+	})
+
 }
 
 function populateHTML(wordsArr) {
-	console.log(wordsArr);
-	listSynsets(wordsArr);
+	// convert the array with synsets to object where we can reference the synsets by their ids
+	var wordsObj = {}
+	$.each(wordsArr, function(i, word) {
+		wordsObj[word.id] = word;
+	})
+
+	listSynsets(wordsObj);
+	// zjistit ID prvniho synsetu, to poslat do adresy a pak zavolat clickSynset, aby zobrazil spravne slovo
 	showWord(wordsArr[3])
 }
 
 function synString(synset) {
 	var synString = "";
 	$.each(synset, function(i, synWord) {
-		console.log(i, synset.length)
 		if (i < synset.length - 1) {
 			comma = ", "
 		}
@@ -62,6 +77,7 @@ function synString(synset) {
 }
 
 function showWord(word) {
+	console.log(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html(word.id);
 	$("#wordMain").html(synString(word.synset))

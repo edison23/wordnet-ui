@@ -1,5 +1,4 @@
 function getData(coalback, input) {
-	// console.log("ajax", input)
 	$.ajax({
 	  url: "kolo-server.json",
 	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
@@ -22,11 +21,8 @@ function getData(coalback, input) {
 
 function onLoad() {
 	var url = parseURL(window.location.href)
-	console.log("kaaaaaaaaaaaaaa", url.query["q"], url.fragment)
 	if (url.query["q"]) {
 		$("#search-input").val(url.query["q"]) // is this correct way of doing it? it's Javascript, after all...
-		// search();
-		// movingOn(url.query, url.fragment)
 		getData(populateHTML.bind(null, url.fragment), url.query["q"]);
 	}
 	else {
@@ -38,14 +34,7 @@ function search() {
 	var input = $("#search-input").val();
 	window.history.pushState(input, "Title", "?q=" + input)
 	getData(populateHTML.bind(null, ""), input);
-	// movingOn(input, "")
 }
-
-// function movingOn(query, fragment) {
-// 	console.log(query)
-// 	fragment = "test"
-// 	getData(populateHTML.bind(null, fragment), query);
-// }
 
 function parseURL(url) {
 	var uri = new URI(url)
@@ -56,11 +45,6 @@ function parseURL(url) {
 }
 
 function listSynsets(synsets, currentID) {
-	// var address = URI.parse(window.location.href);
-	// var query = URI.parseQuery(address.query);
-	// // console.log(URI.fragment(window.location.href));
-	// console.log(currentID)
-
 	var list = $("#synsets");
 	list.empty()
 	$.each(synsets, function(id, synset) {
@@ -77,7 +61,6 @@ function listSynsets(synsets, currentID) {
 // why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
 function populateHTML(wordID, wordsArr) {
 	// by default, let's display first word
-	// console.log("search", wordsArr, wordID)
 	if (wordID == "") {
 		wordID = wordsArr[0].id;
 	}
@@ -89,7 +72,6 @@ function populateHTML(wordID, wordsArr) {
 	})
 
 	listSynsets(wordsObj, wordID);
-	// zjistit ID prvniho synsetu, to poslat do adresy a pak zavolat clickSynset, aby zobrazil spravne slovo
 	showWord(wordsObj[wordID])
 }
 
@@ -118,30 +100,18 @@ function showWord(word) {
 	$("#semGroups > .row").empty();
 
 	$.each(word.paths, function(i, path) {
-		// $("#paths").append('<div class="btn-group btn-breadcrumb breadcrumbs" id="breadcrumbs-' + i + '">')
-		// $.each(path.breadcrumbs, function(j, breadcrumb) {
-		// 	$("#breadcrumbs-" + i).append('<a href="#" class="btn btn-default">' + breadcrumb.name + '</a>');
-		// })
 		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
-			// $("#breadcrumb-" + i).append('<a href="#">' + breadcrumb.name + '</a> > ');
 			$("#breadcrumb-" + i).append('<a href="#">' + synString(breadcrumb.synset) + '</a> > ');
 		});
 	});
 
-	// <ul class="list-group" id="list-col-' + i + '">\n\
-     // <li class="list-group-item head" id="semGroups-head-' + i + '">\
-     // ' + relations.name + '</li>'
-			                 
 	$.each(word.children, function(i, relations) {
 		if (relations.name !== "hyperCat") {
 			$("#semGroups > .row").append('<div class="sem-rels col-lg-4 col-md-6 col-sm-6 col-xs-12" id="semGroup-' + i + '">\n\
 			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relations.name + '</h4>\n\
 			                 <ul class="list-group" id="list-col-' + i + '">\n'
 			                 );
-			// if (i % 2 !== 0) {
-			// 	$()
-			// }
 			$.each(relations.children, function(j, synsets) {
 				$('#list-col-' + i).append('<li class="list-group-item">' + synsets.synset[0].name + '</li>');
 			});

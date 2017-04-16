@@ -1,5 +1,5 @@
 function getData(coalback, input) {
-	console.log(input)
+	// console.log(input)
 	$.ajax({
 	  url: "kolo-server.json",
 	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
@@ -19,18 +19,31 @@ function getData(coalback, input) {
 	},
 	});
 }
+
+function onLoad() {
+	var url = parseURL(window.location.href)
+	console.log(url.query, url.fragment)
+	if (url.query != "") {
+		$("#search-input").val(url.query)
+		search();
+	}
+	else {
+		$("#wordMain").html("Hledej, smudlo.")
+	}
+}
+
 function search() {
 	var input = $("#search-input").val();
-	// window.history.pushState(input, "Title", "?q=" + input)
+	window.history.pushState(input, "Title", "?q=" + input)
 	getData(populateHTML.bind(null), input);
 }
 
 function parseURL(url) {
 	var uri = new URI(url)
-	parsedUrl = {}
-	parsedUrl["fragment"] = uri.fragment();
-	parsedUrl["query"] = uri.query();
-	return parseURL
+	pUrl = {} // parsed URL
+	pUrl["fragment"] = uri.fragment();
+	pUrl["query"] = uri.query();
+	return pUrl
 }
 
 function listSynsets(synsets) {
@@ -45,9 +58,10 @@ function listSynsets(synsets) {
 		list.append('<a href="#' + id + '" class="list-group-item" id="synsetItem-' + id + '">' + synString(synset.synset) + '</a>')
 		$("#synsetItem-" + id).click(function() {
 			showWord(synset)
+			$("#synsets > .active").removeClass("active");
+			$(this).addClass("active")
 		})
 	})
-
 }
 
 function populateHTML(wordsArr) {

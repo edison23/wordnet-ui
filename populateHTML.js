@@ -48,7 +48,7 @@ function listSynsets(synsets, currentID) {
 	var list = $("#synsets");
 	list.empty()
 	$.each(synsets, function(id, synset) {
-		list.append('<a href="#' + id + '" class="list-group-item" id="synsetItem-' + id + '">' + synString(synset.synset) + '</a>')
+		list.append('<a href="#' + id + '" class="list-group-item" id="synsetItem-' + id + '">(' + synset.pos +") " + synString(synset.synset) + '</a>')
 		$("#synsetItem-" + id).click(function() {
 			showWord(synset)
 			$("#synsets > .active").removeClass("active");
@@ -102,18 +102,19 @@ function showWord(word) {
 	$.each(word.paths, function(i, path) {
 		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
-			$("#breadcrumb-" + i).append('<a href="#">' + synString(breadcrumb.synset) + '</a> > ');
+			console.log(breadcrumb)
+			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '">' + synString(breadcrumb.synset) + '</a> > ');
 		});
 	});
 
-	$.each(word.children, function(i, relations) {
-		if (relations.name !== "hyperCat") {
+	$.each(word.children, function(i, relation) {
+		if (relation.name !== "hyperCat") {
 			$("#semGroups > .row").append('<div class="sem-rels col-lg-4 col-md-6 col-sm-6 col-xs-12" id="semGroup-' + i + '">\n\
-			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relations.name + '</h4>\n\
+			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relation.name + '</h4>\n\
 			                 <ul class="list-group" id="list-col-' + i + '">\n'
 			                 );
-			$.each(relations.children, function(j, synsets) {
-				$('#list-col-' + i).append('<li class="list-group-item">' + synsets.synset[0].name + '</li>');
+			$.each(relation.children, function(j, synset) {
+				$('#list-col-' + i).append('<a href="?q=' + synset.id + '" class="list-group-item">' + synString(synset.synset) + '</a>');
 			});
 		};
 	});

@@ -1,5 +1,5 @@
 function getData(coalback, input) {
-	// console.log(input)
+	// console.log("ajax", input)
 	$.ajax({
 	  url: "kolo-server.json",
 	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
@@ -22,35 +22,44 @@ function getData(coalback, input) {
 
 function onLoad() {
 	var url = parseURL(window.location.href)
-	console.log(url.query, url.fragment)
-	if (url.query != "") {
-		$("#search-input").val(url.query)
-		search();
+	console.log("kaaaaaaaaaaaaaa", url.query["q"], url.fragment)
+	if (url.query["q"]) {
+		$("#search-input").val(url.query["q"]) // is this correct way of doing it? it's Javascript, after all...
+		// search();
+		// movingOn(url.query, url.fragment)
+		getData(populateHTML.bind(null, url.fragment), url.query["q"]);
 	}
 	else {
-		$("#wordMain").html("Hledej, smudlo.")
+		$("#wordMain").html("Hledej, šmudlo.")
 	}
 }
 
 function search() {
 	var input = $("#search-input").val();
 	window.history.pushState(input, "Title", "?q=" + input)
-	getData(populateHTML.bind(null), input);
+	getData(populateHTML.bind(null, ""), input);
+	// movingOn(input, "")
 }
+
+// function movingOn(query, fragment) {
+// 	console.log(query)
+// 	fragment = "test"
+// 	getData(populateHTML.bind(null, fragment), query);
+// }
 
 function parseURL(url) {
 	var uri = new URI(url)
 	pUrl = {} // parsed URL
 	pUrl["fragment"] = uri.fragment();
-	pUrl["query"] = uri.query();
+	pUrl["query"] = uri.query(true); // true makes it serialize the shit to data map
 	return pUrl
 }
 
-function listSynsets(synsets) {
+function listSynsets(synsets, currentID) {
 	// var address = URI.parse(window.location.href);
 	// var query = URI.parseQuery(address.query);
 	// // console.log(URI.fragment(window.location.href));
-	// console.log(query)
+	// console.log(currentID)
 
 	var list = $("#synsets");
 	list.empty()
@@ -62,18 +71,26 @@ function listSynsets(synsets) {
 			$(this).addClass("active")
 		})
 	})
+	$("#synsetItem-" + currentID).addClass("active")
 }
 
-function populateHTML(wordsArr) {
+// why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
+function populateHTML(wordID, wordsArr) {
+	// by default, let's display first word
+	// console.log("search", wordsArr, wordID)
+	if (wordID == "") {
+		wordID = wordsArr[0].id;
+	}
+
 	// convert the array with synsets to object where we can reference the synsets by their ids
 	var wordsObj = {}
 	$.each(wordsArr, function(i, word) {
 		wordsObj[word.id] = word;
 	})
 
-	listSynsets(wordsObj);
+	listSynsets(wordsObj, wordID);
 	// zjistit ID prvniho synsetu, to poslat do adresy a pak zavolat clickSynset, aby zobrazil spravne slovo
-	showWord(wordsArr[3])
+	showWord(wordsObj[wordID])
 }
 
 function synString(synset) {
@@ -91,14 +108,14 @@ function synString(synset) {
 }
 
 function showWord(word) {
-	console.log(word);
+	// console.log(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html(word.id);
 	$("#wordMain").html(synString(word.synset))
 	$("#wordDef").html(word.def);
 
 	$("#paths").empty();
-	$("#semGroups").empty();
+	$("#semGroups > .row").empty();
 
 	$.each(word.paths, function(i, path) {
 		// $("#paths").append('<div class="btn-group btn-breadcrumb breadcrumbs" id="breadcrumbs-' + i + '">')
@@ -118,7 +135,7 @@ function showWord(word) {
 			                 
 	$.each(word.children, function(i, relations) {
 		if (relations.name !== "hyperCat") {
-			$("#semGroups").append('<div class="sem-rels col-lg-4 col-md-6 col-sm-6 col-xs-12" id="semGroup-' + i + '">\n\
+			$("#semGroups > .row").append('<div class="sem-rels col-lg-4 col-md-6 col-sm-6 col-xs-12" id="semGroup-' + i + '">\n\
 			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relations.name + '</h4>\n\
 			                 <ul class="list-group" id="list-col-' + i + '">\n'
 			                 );

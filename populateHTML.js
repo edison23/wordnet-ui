@@ -12,6 +12,8 @@ function getData(coalback, input) {
 	success: coalback,
 	error: function() {
 		console.log("Way hay, what shall we do with the drunken sailor?")
+		hideContent(true);
+		$("#ajaxError").show()
 	},
 	complete: function(e, xhr, settings) {
 		console.log("status code: ", e.status )
@@ -21,19 +23,40 @@ function getData(coalback, input) {
 
 function onLoad() {
 	var url = parseURL(window.location.href)
-	if (url.query["q"]) {
-		$("#search-input").val(url.query["q"]) // is this correct way of doing it? it's Javascript, after all...
-		getData(populateHTML.bind(null, url.fragment), url.query["q"]);
+	if (url.query["q"]) { // is this correct way of doing it? it's Javascript, after all...
+		$("#search-input").val(url.query["q"]) 
+		search(url.query["q"], url.fragment)
+		// getData(populateHTML.bind(null, url.fragment), url.query["q"]);
 	}
 	else {
-		$("#wordMain").html("Hledej, šmudlo.")
+		hideContent(true)
+		$("#emptySearch").show()
 	}
 }
 
-function search() {
-	var input = $("#search-input").val();
+function onSearchButt() {
 	window.history.pushState(input, "Title", "?q=" + input)
-	getData(populateHTML.bind(null, ""), input);
+	var input = $("#search-input").val();
+	search(input, "");
+}
+
+function search(query, fragment) {
+	hideContent(true);
+	// $("#wordNotFound").hide();
+	$("#ajaxLoader").show();
+	getData(populateHTML.bind(null, fragment), query);
+}
+
+function hideContent(way) {
+	if (way == true) {
+		$("#theContent-alt").children().hide()
+		$(".kitty").hide()
+		$(".schrodinger").show()
+	}
+	else {
+		$(".schrodinger").hide()
+		$(".kitty").show()
+	}
 }
 
 function parseURL(url) {
@@ -61,18 +84,29 @@ function listSynsets(synsets, currentID) {
 // why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
 function populateHTML(wordID, wordsArr) {
 	// by default, let's display first word
-	if (wordID == "") {
-		wordID = wordsArr[0].id;
+	console.log("delka ", wordsArr.length)
+	if (typeof wordsArr !== 'undefined' && wordsArr.length > 0) {
+		console.log("Word found")
+		hideContent(false);
+		if (wordID == "") {
+			wordID = wordsArr[0].id;
+		}
+
+		// convert the array with synsets to object where we can reference the synsets by their ids
+		var wordsObj = {}
+		$.each(wordsArr, function(i, word) {
+			wordsObj[word.id] = word;
+		})
+
+		listSynsets(wordsObj, wordID);
+		showWord(wordsObj[wordID])
 	}
-
-	// convert the array with synsets to object where we can reference the synsets by their ids
-	var wordsObj = {}
-	$.each(wordsArr, function(i, word) {
-		wordsObj[word.id] = word;
-	})
-
-	listSynsets(wordsObj, wordID);
-	showWord(wordsObj[wordID])
+	else {
+		console.log("Word not found")
+		// $("#ajaxLoader").hide();
+		hideContent(true);
+		$("#wordNotFound").show();
+	}
 }
 
 function synString(synset) {
@@ -90,6 +124,7 @@ function synString(synset) {
 }
 
 function showWord(word) {
+	// tree(word); //not working
 	// console.log(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html(word.id);

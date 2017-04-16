@@ -15,8 +15,9 @@
 		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="URI.js"></script>
+		<script type="text/javascript" src="jquery.address-1.6.js?autoUpdate=1&history=1&tracker=trackFunction&state=/&strict=0&wrap=1"></script>
 		<!-- <script type="text/javascript" src="jquery.URI.js"></script> -->
-		<!-- <script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script> -->
+		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
 		<!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
 		<script type="text/javascript" src="WNTree.js"></script>
 		<script type="text/javascript" src="populateHTML.js"></script>
@@ -36,6 +37,8 @@
 				    // getData();
 				    // search();
 				    onLoad()
+
+				    
 				});
 		</script>
 	</head>
@@ -65,12 +68,13 @@
 					<div class="input-group" id="search">
 						<input id="search-input" class="form-control" type="text" value="">
 						<span class="input-group-btn">
-					    	<button class="btn btn-default" id="search-butt" type="submit" onclick='search()'>
+					    	<button class="btn btn-default" id="search-butt" type="submit" onclick='onSearchButt()'>
 								<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
 					    	</button>
 					    </span>
-					</div>	
-					<div id="wordMeanings">
+					</div>
+					<div id="wordMeanings-alt" class="schrodinger"></div>	
+					<div id="wordMeanings" class="kitty">
 						<h2 class="yon b600 c-acc">Found synonym rings (synsets):</h2>
 						<div class="list-group" id="synsets">
 							<!-- <a href="#" class="list-group-item">[n] kolo:1</a>
@@ -89,7 +93,13 @@
 						  	WNTree("WNTree");
 						</script>
 					</div>
-					<div id="theContent">
+					<div id="theContent-alt" class="schrodinger">
+						<div id="ajaxLoader" class="loader stateNote hidden"></div>
+						<div id="ajaxError" class="stateNote hidden">Ajax threw an error. Refer to console log for further details.</div>
+						<div id="wordNotFound" class="stateNote hidden">What you've searched for is not a word.</div>
+						<div id="emptySearch" class="stateNote hidden">Try searching for some word.</div>
+					</div>
+					<div id="theContent" class="kitty">
 						<div id="wordStuff">
 							<h2 class="ichi c-acc b400" id="wordMain">
 								<!-- kolo -->
@@ -124,7 +134,8 @@
 							</div>
 						</div>
 						<div class="rowBlah">
-							<div class="col-xs-12" id="semGroups">
+							<!-- <div id="semGroups-alt" class="schrodinger">None found</div> -->
+							<div class="col-xs-12 kitty" id="semGroups">
 								<h3 class="san c-acc b600">Semantic relations</h3>
 								<div class="row">
 								 <!-- <div class="sem-rels col-lg-4 col-md-6 col-xs-12" id=""> -->

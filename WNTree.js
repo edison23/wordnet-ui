@@ -157,11 +157,12 @@ function drawTree(canvas, nodes, links, diagonal, direction) {
     })
 }
 
-function WNTree() 
+function WNTree(data) 
 {
   sizes = getSizes($("#WNTree"));
 
-  var canvasSizes = {width: sizes.elWidth, height: sizes.docHeight};
+  var canvasSizes = {width: "2000", height: "2000"};
+  // var canvasSizes = {width: sizes.elWidth, height: sizes.docHeight};
 
   // let's try not allowing trees narrower than some width
   if (canvasSizes.width < 800) {
@@ -191,10 +192,12 @@ function WNTree()
   hyperTree = d3.layout.tree().size([treeSizes.height, treeSizes.width/6])
 
   // load the json
-  d3.json("kolo.json", function(data) {
+  // d3.json("kolo.json", function(data) {
     // get the hyperonyms node before deleting
     var hyperonyms = getArrayElsByLabel(data.children, "hyperCat");
+    console.log(hyperonyms)
     delArrayElByLabel(data.children, "hyperCat", 1);
+    delArrayElByLabel(data, "paths", 1);
 
     // console.log(hyperonyms);
     // remove the metalabel ("hyperCat") (as that's where root label is)
@@ -221,5 +224,5 @@ function WNTree()
     drawTree(canvasChildren, nodes, links, diagonal, 1);
     drawTree(hyperCanvas, hyperNodes, hyperLinks, hyperDiagonal, -1);
 
-  });
+  // };
 };

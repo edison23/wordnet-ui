@@ -84,9 +84,9 @@ function listSynsets(synsets, currentID) {
 // why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
 function populateHTML(wordID, wordsArr) {
 	// by default, let's display first word
-	console.log("delka ", wordsArr.length)
+	// console.log("delka ", wordsArr.length)
 	if (typeof wordsArr !== 'undefined' && wordsArr.length > 0) {
-		console.log("Word found")
+		// console.log("Word found")
 		hideContent(false);
 		if (wordID == "") {
 			wordID = wordsArr[0].id;
@@ -102,7 +102,7 @@ function populateHTML(wordID, wordsArr) {
 		showWord(wordsObj[wordID])
 	}
 	else {
-		console.log("Word not found")
+		// console.log("Word not found")
 		// $("#ajaxLoader").hide();
 		hideContent(true);
 		$("#wordNotFound").show();
@@ -124,20 +124,22 @@ function synString(synset) {
 }
 
 function showWord(word) {
-	// tree(word); //not working
 	// console.log(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html(word.id);
 	$("#wordMain").html(synString(word.synset))
 	$("#wordDef").html(word.def);
 
+	$("#WNTree").empty();
 	$("#paths").empty();
 	$("#semGroups > .row").empty();
+	WNTree(word); //not working
+
 
 	$.each(word.paths, function(i, path) {
 		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
-			console.log(breadcrumb)
+			// console.log(breadcrumb)
 			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '">' + synString(breadcrumb.synset) + '</a> > ');
 		});
 	});

@@ -1,7 +1,7 @@
 function getData(coalback, input) {
 	$.ajax({
-	  url: "kolo-server.json",
-	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
+	  // url: "kolo-server.json",
+	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	    if (xhr.overrideMimeType)
 	    {
@@ -10,13 +10,13 @@ function getData(coalback, input) {
 	  },
 	dataType: 'json',
 	success: coalback,
-	error: function() {
-		console.log("Way hay, what shall we do with the drunken sailor?")
+	error: function(e, xhr, settings) {
+		console.log(e)
 		hideContent(true);
 		$("#ajaxError").show()
 	},
 	complete: function(e, xhr, settings) {
-		console.log("status code: ", e.status )
+		console.log("Ajax operation completed with status code " + e.status )
 	},
 	});
 }
@@ -140,7 +140,13 @@ function showWord(word) {
 		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
 			// console.log(breadcrumb)
-			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '">' + synString(breadcrumb.synset) + '</a> > ');
+			if (j < path.breadcrumbs.length-1) {
+				var arrow = "➡ "
+			}
+			else {
+				var arrow = ""
+			}
+			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '">' + synString(breadcrumb.synset) + '</a> ' + arrow);
 		});
 	});
 

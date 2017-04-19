@@ -35,8 +35,8 @@ function onLoad() {
 }
 
 function onSearchButt() {
-	window.history.pushState(input, "Title", "?q=" + input)
 	var input = $("#search-input").val();
+	window.history.pushState(input, "Title", "?q=" + input)
 	search(input, "");
 }
 

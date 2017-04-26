@@ -1,8 +1,10 @@
-function getData(coalback, input) {
+function getData(coalback, input, source) {
+		console.log(source)
 	$.ajax({
 	  // url: "kolo-server.json",
-	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/wncz?action=jsonvis&query=" + input,
+	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
+	  	console.log("https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input)
 	    if (xhr.overrideMimeType)
 	    {
 	      xhr.overrideMimeType("application/json");
@@ -25,7 +27,8 @@ function onLoad() {
 	var url = parseURL(window.location.href)
 	if (url.query["q"]) { // is this correct way of doing it? it's Javascript, after all...
 		$("#search-input").val(url.query["q"]) 
-		search(url.query["q"], url.fragment)
+		$("#data-source-selection").val(url.query["src"]) 
+		search(url.query["q"], url.query["src"], url.fragment)
 		// getData(populateHTML.bind(null, url.fragment), url.query["q"]);
 	}
 	else {
@@ -36,15 +39,17 @@ function onLoad() {
 
 function onSearchButt() {
 	var input = $("#search-input").val();
+	var source = $("#data-source-selection").val()
 	window.history.pushState(input, "Title", "?q=" + input)
-	search(input, "");
+	window.history.pushState(source, "asdfsadf", "?src=" + source)
+	search(input, source, "");
 }
 
-function search(query, fragment) {
+function search(query, source, fragment) {
 	hideContent(true);
 	// $("#wordNotFound").hide();
 	$("#ajaxLoader").show();
-	getData(populateHTML.bind(null, fragment), query);
+	getData(populateHTML.bind(null, fragment), query, source);
 }
 
 function hideContent(way) {

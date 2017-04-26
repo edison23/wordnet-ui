@@ -37,6 +37,9 @@
 				    // getData();
 				    // search();
 				    onLoad()
+				    window.addEventListener('popstate', function(event) {
+				      console.log('popstate fired!');
+				  });
 
 				    
 				});
@@ -72,6 +75,13 @@
 								<!-- <i class="fa fa-search" aria-hidden="true"></i> -->
 					    	</button>
 					    </span>
+					<div id="src-select" class="selectpicker">
+					    <select id="data-source-selection">
+					    	<option value="wncz">Czech wordnet</option>
+					    	<option value="wneng">English wordnet</option>
+					    	<option value="wnfre">French wordnet</option>
+					    </select>
+					</div>
 					</div>
 					<div id="wordMeanings-alt" class="schrodinger"></div>	
 					<div id="wordMeanings" class="kitty">

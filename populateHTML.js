@@ -210,7 +210,7 @@ function populateHTML(wordID, wordsArr) {
 
 // convert array with synsets into a string delimited by ", "
 // synset = array
-function synString(synset) {
+function synString(synset, linking) {
 	var synString = "";
 	$.each(synset, function(i, synWord) {
 		if (i < synset.length - 1) {
@@ -219,7 +219,14 @@ function synString(synset) {
 		else {
 			comma = ""
 		}
-		synString += synWord.name + "<sup>" + synWord.meaning + "</sup>" + comma;
+
+		if (linking) {
+			// beware of the c-acc class, it's just an ugly hack for main word for now
+			synString += "<a href=\"?input=" + synWord.name + "\" id=\"" + synWord.name + "\" class=\"synset-links\">" + synWord.name + "</a><sup>" + synWord.meaning + "</sup>" + comma;
+		}
+		else {
+			synString += synWord.name + "<sup>" + synWord.meaning + "</sup>" + comma;
+		}
 	});
 	return synString;
 }
@@ -229,8 +236,9 @@ function synString(synset) {
 function showWord(word) {
 	
 	$("#wordPOS").html(word.pos);
-	$("#wordID").html(word.id);
-	$("#wordMain").html(synString(word.synset))
+	$("#wordID").html("<a href=\"?input=" + word.id + "\" id=\"" + word.id + "\" class=\"synset-links\">" + word.id + "</a>");
+	// $("#wordID").html(word.id);
+	$("#wordMain").html(synString(word.synset, true));
 	$("#wordDef").html(word.def);
 
 	$("#WNTree").empty();
@@ -253,18 +261,22 @@ function showWord(word) {
 			}
 			// this has potential to break because it's at least a second place where we use word ID as an element ID without additional string (because it's used as search query on click)
 			// we might wanna fix this by prepending a uniq-ish string and stripping it later.. if it proves to break anyway
-			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '" id="' + breadcrumb.id + '" class="path-item">' + synString(breadcrumb.synset) + '</a> ' + arrow);
+			$("#breadcrumb-" + i).append('<a href="?input=' + breadcrumb.id + '" id="' + breadcrumb.id + '" class="path-item">' + synString(breadcrumb.synset) + '</a> ' + arrow);
 		});
 	});
 
 	// event listeren again (for paths)
 	// using .one() is a shitty way of going around a problem when the event listeners where being exponentially stuck up on each other resulting in a very annoying amount of ajax requests
 	// btw i have no idea why this kept happening, but God bless .one() and .off() (they might be slightly redundant, but .one() wasn't enough, somethings looping the shit )
-	$("#paths").off()
-	$("#paths").one("click", function(e) {
-		if (e.target.className == "path-item") {
+	$("#theContent").off()
+	$("#theContent").on("click", function(e) {
+		console.log("neco se tu sere")
+		if (   e.target.className == "path-item" 
+		    || e.target.className == "synset-links" 
+		    || e.target.className == "list-group-item") {
 			e.preventDefault();
 			var src = $("#data-source-selection").val();
+			console.log("ale proslo to", e.target.id, src)
 			search(e.target.id, src);
 			pushGuai({input: e.target.id, source: src}, {"fn":"search", "arg":[e.target.id, src]}, false)
 		}
@@ -280,20 +292,20 @@ function showWord(word) {
 				);
 
 			$.each(relation.children, function(j, synset) {
-				$('#list-col-' + i).append('<a href="?q=' + synset.id + '" id="' + synset.id + '" class="list-group-item">' + synString(synset.synset) + '</a>');
+				$('#list-col-' + i).append('<a href="?input=' + synset.id + '" id="' + synset.id + '" class="list-group-item">' + synString(synset.synset) + '</a>');
 			});
 		};
 	});
 
 	// event listeren again (for related synsets)
-	$("#semGroups").off()
-	$("#semGroups").one("click", function(e) {
-		if (e.target.className == "list-group-item") {
-			e.preventDefault();
-			var src = $("#data-source-selection").val();
-			search(e.target.id, src);
-			pushGuai({input: e.target.id, source: src}, {"fn":"search", "arg":[e.target.id, src]})
-		}
-		e.stopPropagation();
-	});
+	// $("#semGroups").off()
+	// $("#semGroups").one("click", function(e) {
+	// 	if (e.target.className == "list-group-item") {
+	// 		e.preventDefault();
+	// 		var src = $("#data-source-selection").val();
+	// 		search(e.target.id, src);
+	// 		pushGuai({input: e.target.id, source: src}, {"fn":"search", "arg":[e.target.id, src]})
+	// 	}
+	// 	e.stopPropagation();
+	// });
 }

@@ -93,7 +93,6 @@ a:hover {
 	padding: 0.4rem 0.2rem 0.4rem 0.6rem;
 }
 
-
 .c-std {
 	color: #3f3f3f;
 }
@@ -173,6 +172,11 @@ sup {
 
 #container {
 	width: 100%;
+}
+
+/*destroying the beaty of c-acc class because of jquery selectors*/
+#wordMain > a {
+	color: #3030a9;
 }
 
 .btn {

@@ -254,7 +254,7 @@ sup {
 }
 
 #search input {
-	height: 2rem;
+	height: 1.9rem;
 	border: 3px solid #3030a9;
 	background: #fff;
 	color: #3f3f3f;
@@ -267,6 +267,28 @@ sup {
 	padding-bottom: 2rem;
 	border-bottom: 1px solid #d7d7d7;
 	font-size: inherit;
+	width: 100%;
+}
+
+/*#d-src-sel > div {
+	width: 100%;
+}
+
+#d-src-sel > div > .btn {
+	background-color: white;
+}
+
+#d-src-sel > div > .btn {
+	background-color: white;
+}*/
+
+#data-source-selection {
+	width: 100%;
+	border: 3px solid #3030a9;
+	background-color: #fff;
+	color: #3030a9;
+	border-radius: 0.25rem;
+	margin: 0.4rem 0 0 0;
 }
 
 #synsets {

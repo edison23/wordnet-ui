@@ -1,5 +1,5 @@
 function getData(coalback, input, source) {
-		console.log(source)
+		// console.log(input, source)
 	$.ajax({
 	  // url: "kolo-server.json",
 	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
@@ -13,7 +13,8 @@ function getData(coalback, input, source) {
 	dataType: 'json',
 	success: coalback,
 	error: function(e, xhr, settings) {
-		console.log(e)
+		
+		console.log("Ajax error")
 		hideContent(true);
 		$("#ajaxError").show()
 	},
@@ -24,32 +25,113 @@ function getData(coalback, input, source) {
 }
 
 function onLoad() {
-	var url = parseURL(window.location.href)
-	if (url.query["q"]) { // is this correct way of doing it? it's Javascript, after all...
-		$("#search-input").val(url.query["q"]) 
-		$("#data-source-selection").val(url.query["src"]) 
-		search(url.query["q"], url.query["src"], url.fragment)
-		// getData(populateHTML.bind(null, url.fragment), url.query["q"]);
+	$("#text-rep").click(function() {
+    	$("#WNTree").hide();
+        $("#theContent").show();
+    });
+    $("#dendr-rep").click(function() {
+    	$("#theContent").hide();
+    	$("#WNTree").show();
+    });
+
+    $('[data-toggle="tooltip"]').tooltip(); 
+
+    $("#search").on("submit", function(e) {
+		e.preventDefault();
+    	onSearchButt();
+    })
+
+
+	window.addEventListener('popstate', function(e) {
+		
+		popGuai(e.state)
+	});
+
+
+	var uri = new URI();
+	var queries  = uri.search(true)
+	var fragment = uri.fragment();
+	
+	$("#search-input").val(queries["input"])
+	$("#data-source-selection").val(queries["source"])
+
+	if (! queries["source"]) {
+		$("#data-source-selection").val("wncz")
 	}
-	else {
+
+	if (! queries["input"]) {
 		hideContent(true)
 		$("#emptySearch").show()
 	}
+	else {
+		search(queries["input"], queries["source"], fragment)
+	}
+	// var url = parseURL(window.location.href)
+	// if (url.query["q"]) { // is this correct way of doing it? it's Javascript, after all...
+	// 	$("#search-input").val(url.query["q"]) 
+	// 	$("#data-source-selection").val(url.query["src"]) 
+	// 	search(url.query["q"], url.query["src"], url.fragment)
+	// 	// getData(populateHTML.bind(null, url.fragment), url.query["q"]);
+	// }
+	// else {
+		// hideContent(true)
+		// $("#emptySearch").show()
+	// }
+
+    
 }
 
 function onSearchButt() {
-	var input = $("#search-input").val();
-	var source = $("#data-source-selection").val()
-	window.history.pushState(input, "Title", "?q=" + input)
-	window.history.pushState(source, "asdfsadf", "?src=" + source)
-	search(input, source, "");
+	var queries = {};
+	queries['input'] = $("#search-input").val();
+	queries['source'] = $("#data-source-selection").val()
+	if (! queries["input"]) {
+		hideContent(true)
+		$("#emptySearch").show()
+		return false;
+	}
+	// pushGuai(queries, {"fn":"search","arg":"'" + queries['input'] + "','" + queries['source'] + "'"})
+	pushGuai(queries, {"fn":"search","arg":[queries['input'], queries['source']]})
+	search(queries['input'], queries['source'], "");
+	return false;
 }
 
-function search(query, source, fragment) {
+function pushGuai(queryMap, data, frag) { // Guai because we can't/shouldn't use "pushState" as that's taken
+	var uri = new URI();
+	if (frag) {
+		// this means the queryMap is not an actual query map but a fragment (string)
+		uri.hash("#" + queryMap)
+	}
+	else {
+		var queries  = uri.search(true)
+		uri.hash("")
+		$.extend(queries, queryMap) // add new queries to current ones
+		uri.search(queries);
+	}
+	window.history.pushState(data, null, uri)
+}
+
+function popGuai(data) {
+	// http://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
+	
+	window[data.fn](data.arg[0], data.arg[1])
+}
+
+// function synsetClick(e) {
+// 	
+// 	if (e.target !== e.currentTarget) {
+// 		var clickedItem = e.target.id;
+// 		alert("Hello " + clickedItem);
+// 	}
+// 	e.stopPropagation();
+// }
+
+function search(query, source, wordID) {
 	hideContent(true);
 	// $("#wordNotFound").hide();
 	$("#ajaxLoader").show();
-	getData(populateHTML.bind(null, fragment), query, source);
+	$("#search-input").val(query);
+	getData(populateHTML.bind(null, wordID), query, source);
 }
 
 function hideContent(way) {
@@ -75,25 +157,35 @@ function parseURL(url) {
 function listSynsets(synsets, currentID) {
 	var list = $("#synsets");
 	list.empty()
-	$.each(synsets, function(id, synset) {
-		list.append('<a href="#' + id + '" class="list-group-item" id="synsetItem-' + id + '">(' + synset.pos +") " + synString(synset.synset) + '</a>')
-		$("#synsetItem-" + id).click(function() {
-			showWord(synset)
+	$("#synsets").off();
+	$("#synsets").on("click", function(e) {
+		if (e.target !== e.currentTarget) {
+			e.preventDefault();
+			console.log(synsets)
+			showWord(synsets[e.target.id]);
 			$("#synsets > .active").removeClass("active");
-			$(this).addClass("active")
-		})
+			$("#synsets > #" + e.target.id).addClass("active");
+			pushGuai(e.target.id, {"fn":"showWord", "arg":[synsets[e.target.id], ""]}, true)
+		}
+		e.stopPropagation();
+	});
+	// potential to break due to multiple places where wordID is assigned as elID (see elsewhere)
+	$.each(synsets, function(id, synset) {
+		list.append('<a href="#' + id + '" class="list-group-item" id="' + id + '">(' + synset.pos +") " + synString(synset.synset) + '</a>')
 	})
-	$("#synsetItem-" + currentID).addClass("active")
+	$("#" + currentID).addClass("active")
 }
 
 // why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
 function populateHTML(wordID, wordsArr) {
 	// by default, let's display first word
-	// console.log("delka ", wordsArr.length)
+	
 	if (typeof wordsArr !== 'undefined' && wordsArr.length > 0) {
-		// console.log("Word found")
+		
 		hideContent(false);
-		if (wordID == "") {
+		// if (wordID == "") {
+		if (!wordID) {
+			// console.log("slovo nedefinovano")
 			wordID = wordsArr[0].id;
 		}
 
@@ -107,7 +199,7 @@ function populateHTML(wordID, wordsArr) {
 		showWord(wordsObj[wordID])
 	}
 	else {
-		// console.log("Word not found")
+		
 		// $("#ajaxLoader").hide();
 		hideContent(true);
 		$("#wordNotFound").show();
@@ -129,7 +221,7 @@ function synString(synset) {
 }
 
 function showWord(word) {
-	// console.log(word);
+	
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html(word.id);
 	$("#wordMain").html(synString(word.synset))
@@ -138,21 +230,36 @@ function showWord(word) {
 	$("#WNTree").empty();
 	$("#paths").empty();
 	$("#semGroups > .row").empty();
-	WNTree(word); //not working
+	// WNTree(word); //not working
 
 
 	$.each(word.paths, function(i, path) {
 		$("#paths").append('<div class="breadcrumbs properties" id="breadcrumb-' + i + '">')
 		$.each(path.breadcrumbs, function(j, breadcrumb) {
-			// console.log(breadcrumb)
+			
 			if (j < path.breadcrumbs.length-1) {
 				var arrow = "➡ "
 			}
 			else {
 				var arrow = ""
 			}
-			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '">' + synString(breadcrumb.synset) + '</a> ' + arrow);
+			// this has potential to break because it's at least a second place where we use word ID as an element ID without additional string (because it's used as search query on click)
+			// we might wanna fix this by prepending a uniq-ish string and stripping it later.. if it proves to break anyway
+			$("#breadcrumb-" + i).append('<a href="?q=' + breadcrumb.id + '" id="' + breadcrumb.id + '" class="path-item">' + synString(breadcrumb.synset) + '</a> ' + arrow);
 		});
+	});
+
+	// using one is a shitty way of going around a problem when the event listeners where being exponentially stuck up on each other resulting in a very annoying amount of ajax requests
+	// btw i have no idea why this kept happening, but God bless .one() and .off() (they might be slightly redundant, but .one() wasn't enough, somethings looping the shit )
+	$("#paths").off()
+	$("#paths").one("click", function(e) {
+		if (e.target.className == "path-item") {
+			e.preventDefault();
+			var src = $("#data-source-selection").val();
+			search(e.target.id, src);
+			pushGuai({input: e.target.id, source: src}, {"fn":"search", "arg":[e.target.id, src]}, false)
+		}
+		e.stopPropagation();
 	});
 
 	$.each(word.children, function(i, relation) {
@@ -161,9 +268,21 @@ function showWord(word) {
 			                 <h4 class="yon c-acc b600" id="semGroups-head-' + i + '">' + relation.name + '</h4>\n\
 			                 <ul class="list-group" id="list-col-' + i + '">\n'
 			                 );
+
 			$.each(relation.children, function(j, synset) {
-				$('#list-col-' + i).append('<a href="?q=' + synset.id + '" class="list-group-item">' + synString(synset.synset) + '</a>');
+				$('#list-col-' + i).append('<a href="?q=' + synset.id + '" id="' + synset.id + '" class="list-group-item">' + synString(synset.synset) + '</a>');
 			});
 		};
+	});
+
+	$("#semGroups").off()
+	$("#semGroups").one("click", function(e) {
+		if (e.target.className == "list-group-item") {
+			e.preventDefault();
+			var src = $("#data-source-selection").val();
+			search(e.target.id, src);
+			pushGuai({input: e.target.id, source: src}, {"fn":"search", "arg":[e.target.id, src]})
+		}
+		e.stopPropagation();
 	});
 }

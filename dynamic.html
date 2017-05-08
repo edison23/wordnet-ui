@@ -12,6 +12,9 @@
 		<!-- <link rel="stylesheet" href="nunito-webfont-2/stylesheet.css"> -->
 		<link rel="stylesheet" href="akrobat-webfont/akrobat-font.css">
 		<link rel="stylesheet" href="bootstrap-select.min.css">
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script>
+		<link href="vis-network.min.css" rel="stylesheet" type="text/css" />
+		<style type="text/css" rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"></style>
 
 		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
@@ -23,6 +26,7 @@
 		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
 		<!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
 		<!-- <script type="text/javascript" src="WNTree.js"></script> -->
+		<script type="text/javascript" src="WNTree_vis.js"></script>
 		<script type="text/javascript" src="populateHTML.js"></script>
 		<script>
 			$(document).ready( function() {
@@ -78,7 +82,7 @@
 								<option value="wncz" selected>Czech wordnet</option>
 								<option value="wneng" selected>English wordnet</option>
 								<option value="wnfre" selected>French wordnet</option>
-								<option value="wngre" selected>German wordnet</option>
+								<option value="wngre" selected>Greek wordnet</option>
 								<option value="wnkor" selected>Korean wordnet</option>
 								<option value="wnpolwr" selected>Polish wordnet</option>
 								<option value="wnslv" selected>Slovenian wordnet</option>
@@ -103,9 +107,8 @@
 				<div class="col col-sm-12 col-md-8 col-lg-9" id="main">
 					
 					<div id="WNTree">
-						<script>
-						  	// WNTree("WNTree");
-						</script>
+						<p>asdfasdfasdf</p>
+						<div id="mynetwork"></div>
 					</div>
 					<div id="theContent-alt" class="schrodinger">
 						<div id="ajaxLoader" class="loader stateNote hidden"></div>

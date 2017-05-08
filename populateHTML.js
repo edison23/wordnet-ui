@@ -1,7 +1,7 @@
 function getData(coalback, input, source) {
 	$.ajax({
-	  // url: "kolo-server.json",
-	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
+	  url: "kolo-server.json",
+	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	  	console.log("https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input)
 	    if (xhr.overrideMimeType)
@@ -116,7 +116,9 @@ function pushGuai(queryMap, data, frag) {
 // One solution would be a global variable, but so far we got around without them, so storing the data in the browser history seems like a better idea. This is, however, subject to be discussed and changed for better, let's hope.
 // data = dict from browser historyAPI
 function popGuai(data) {
-	window[data.fn](data.arg[0], data.arg[1])
+	if (data) {
+		window[data.fn](data.arg[0], data.arg[1])
+	}
 }
 
 // show/hide some content and proceed with the ajax call
@@ -234,14 +236,14 @@ function synString(synset, linking) {
 // let's show the details of selected word!
 // word = object/dict
 function showWord(word) {
-	
+	WNTree(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html("<a href=\"?input=" + word.id + "\" id=\"" + word.id + "\" class=\"synset-links\">" + word.id + "</a>");
 	// $("#wordID").html(word.id);
 	$("#wordMain").html(synString(word.synset, true));
 	$("#wordDef").html(word.def);
 
-	$("#WNTree").empty();
+	// $("#WNTree").empty();
 	$("#paths").empty();
 	$("#semGroups > .row").empty();
 	

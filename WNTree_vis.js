@@ -1,46 +1,58 @@
 function WNTree(data) {
 	var iter = 0;
+	var semgrIt = 1;
 	// console.log(data);
 	var points = [];
 	var cons = [];
 	var nodeStack = [];
 
-	function addToNodesAndEdges(name, currentID, parentID, type) {
-		if (type == "synset") {
-			points.push({"id": currentID, "label": name, "group": "synsets"});
-			cons.push({"from": parentID, "to": currentID});
+	function addToNodesAndEdges(name, currentID, parentID, nodeType, edgeType) {
+		switch(nodeType) {
+			case "synset": 
+				points.push({"id": currentID, "label": "synset\n" + name, "group": "synsets"}); 
+				cons.push({"from": parentID, "to": currentID});
+				break;
+			case "leaf": 
+				points.push({"id": currentID, "label": name});
+				cons.push({"from": parentID, "to": currentID, "label": "member\nword", "dashes": true});
+				break;
+			case "semGroup": 
+				points.push({"id": currentID, "label": name, "group": "semgroup"});
+				cons.push({"from": parentID, "to": currentID, "label": "semantic\nrelationship", "arrows": "to"});
+				break
+			default: 
+				points.push({"id": currentID, "label": name});
+				cons.push({"from": parentID, "to": currentID});
+				break
 		}
-		else if (type == "leaf") {
-			points.push({"id": currentID, "label": name});
-			cons.push({"from": parentID, "to": currentID});
-		}
+
+		// if (type == "synset") {
+		// 	points.push({"id": currentID, "label": name, "group": "synsets"});
+		// 	// cons.push({"from": parentID, "to": currentID});
+		// }
+		// else if (type == "leaf") {
+		// 	points.push({"id": currentID, "label": name});
+		// }
+		
 	}
 
 	function BFSThruSynsets(obj, parentI) {
 		iter++;
-		// console.log(parentI, obj)
-		// if (obj.id) {
-		// 	points.push({"id": iter, "label": obj.id, "group": "synsets"});
-		// 	// points.push({"id": iter, "label": obj.id});
-		// 	cons.push({"from": parentI, "to": iter});
-		// }
-		// else if (obj.name) {
-		// 	points.push({"id": iter, "label": obj.name});
-		// 	cons.push({"from": parentI, "to": iter});
-		// }
-		// else {
-		// 	points.push({"id": iter, "label": "unknown name"})
-		// };
 
+		// this means it's a synset, not a group name (eg. meronyms) or a leaf word
 		if (obj.id) {
-			addToNodesAndEdges(obj.id, iter, parentI, "synset")
+			console.log(iter, obj)
+			addToNodesAndEdges(obj.id, iter, parentI, "synset", "")
+		}
+		// leaves
+		else if (obj.name && !obj.children) {
+			addToNodesAndEdges(obj.name, iter, parentI, "leaf", "")
+		}
+		else if (obj.children.length > 0) {
+			addToNodesAndEdges(obj.name, iter, parentI, "semGroup", "")
 		}
 
-		else if (obj.name && (!obj.children || obj.children.length > 0)) {
-			console.log(obj)
-			addToNodesAndEdges(obj.name, iter, parentI, "leaf")
-		}
-
+		// the basterd would throw exception if we didn't test this shit, otherwise it's nothing
 		if (obj.children) {
 			$.each(obj.children, function(i, child) {
 				if (child.name !== "hyperCat") {
@@ -66,9 +78,7 @@ function WNTree(data) {
 	var edges = new vis.DataSet(cons);
 
 	// create a network
-	// $("#WNTree").html("asdfkasdfas")
 	var wntreecontainer = document.getElementById('WNTree');
-	console.log(wntreecontainer)
 	var dataVis = {
 	  nodes: nodes,
 	  edges: edges
@@ -102,8 +112,18 @@ function WNTree(data) {
 	        	synsets: {
 	        		shape: 'diamond',
 	        		size: 5
+	        	},
+	        	semgroup: {
+	        		font: {
+	        			size: 18
+	        		}
 	        	}
 	        },
+	        edges: {
+	        	font: {
+	        		align: 'middle'
+	        	}
+	        }
 	        // edges: {
 	        //     width: 2
 	        // }

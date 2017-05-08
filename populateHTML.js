@@ -1,7 +1,7 @@
 function getData(coalback, input, source) {
 	$.ajax({
-	  url: "kolo-server.json",
-	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
+	  // url: "kolo-server.json",
+	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	  	console.log("https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input)
 	    if (xhr.overrideMimeType)

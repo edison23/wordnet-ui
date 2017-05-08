@@ -18,7 +18,11 @@ function WNTree(data) {
 				break;
 			case "semGroup": 
 				points.push({"id": currentID, "label": name, "group": "semgroup"});
-				cons.push({"from": parentID, "to": currentID, "label": "semantic\nrelationship", "arrows": "to"});
+				cons.push({"from": parentID, "to": currentID, "label": "semantic\nrelationship", "arrows": "to", "width": 3});
+				break;
+			case "root": 
+				points.push({"id": currentID, "label": name, "group": "root"});
+				// cons.push({"from": parentID, "to": currentID, "label": "semantic\nrelationship", "arrows": "to", "width": 3});
 				break
 			default: 
 				points.push({"id": currentID, "label": name});
@@ -41,8 +45,14 @@ function WNTree(data) {
 
 		// this means it's a synset, not a group name (eg. meronyms) or a leaf word
 		if (obj.id) {
-			console.log(iter, obj)
-			addToNodesAndEdges(obj.id, iter, parentI, "synset", "")
+			// that would be the root node
+			if (iter == 1) {
+				addToNodesAndEdges(obj.id, iter, parentI, "root", "")
+			}
+			else {
+				addToNodesAndEdges(obj.id, iter, parentI, "synset", "")
+			}
+			
 		}
 		// leaves
 		else if (obj.name && !obj.children) {
@@ -104,9 +114,13 @@ function WNTree(data) {
 	            shape: 'box',
 	            font: {
 	                size: 14,
-	                color: '#000000'
+	                color: '#3f3f3f'
 	            },
-	            borderWidth: 2
+	            borderWidth: 2,
+	            color: {
+	            	background: '#d7d7f3',
+	            	border: '#3030a9',
+	            }
 	        },
 	        groups: {
 	        	synsets: {
@@ -114,6 +128,16 @@ function WNTree(data) {
 	        		size: 5
 	        	},
 	        	semgroup: {
+	        		shape: 'triangle',
+	        		size: 5,
+	        		font: {
+	        			size: 18
+	        		}
+	        	},
+	        	root: {
+	        		shape: 'dot',
+	        		size: '8',
+	        		color: 'red',
 	        		font: {
 	        			size: 18
 	        		}
@@ -122,7 +146,8 @@ function WNTree(data) {
 	        edges: {
 	        	font: {
 	        		align: 'middle'
-	        	}
+	        	},
+	        	// color: '#3030a9'
 	        }
 	        // edges: {
 	        //     width: 2

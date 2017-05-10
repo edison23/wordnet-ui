@@ -102,7 +102,10 @@ function pushGuai(queryMap, data, frag) {
 	}
 	else {
 		var queries  = uri.search(true)
-		uri.hash("")
+		// if going to another word, we need to delete the hash, otherwise it'll make some shit there
+		if (uri.search().input !== queryMap.input) {
+			uri.hash("")
+		}
 		$.extend(queries, queryMap) // add new queries to current ones
 		uri.search(queries);
 	}
@@ -146,12 +149,12 @@ function hideContent(way) {
 	}
 }
 
-function getQueries() {
-	var uri = new URI;
-	return {"blah": "debil"};
-	// return uri.search(true);
+// function getQueries() {
+// 	var uri = new URI;
+// 	return {"blah": "debil"};
+// 	// return uri.search(true);
 
-}
+// }
 
 // write down the list of found synsets
 // synsets = dict, currentID = string
@@ -165,19 +168,52 @@ function listSynsets(synsets, currentID) {
 	// also prevent default (click) and stop them from further propagation; 
 	// on click remove the .active class from wherever it is and append it to the clicked link; 
 	// then push new state
-	$("#synsets").off();
-	$("#synsets").on("click", function(e) {
+	$("#synsets, #settings").off();
+	$("#synsets, #settings").on("click", function(e) {
 		if (e.target !== e.currentTarget) {
 			e.preventDefault();
 			var uri = new URI; //this is rather disgusting way of passing the right parametr from url to function
 			var vis = uri.search(true).vis
-			renderView(synsets[e.target.id], vis);
-			$("#synsets > .active").removeClass("active");
-			$("#synsets > #" + e.target.id).addClass("active");
-			pushGuai(e.target.id, {"fn":"renderView", "arg":[synsets[e.target.id], vis]}, true);
+			var hash = uri.fragment()
+			// the problem here is that setting queries erases the hash...
+			if (e.target.id == "text-rep") {
+				console.log("hash:" + hash + "; synsets: ", synsets[hash])
+				renderView(synsets[hash], "text")
+				pushGuai({"vis":"text"}, {"fn":"renderView", "arg":[synsets[hash], vis]});
+			}
+			else if (e.target.id == "dendr-rep") {
+				renderView(synsets[hash], "graph")
+				pushGuai({"vis":"graph"}, {"fn":"renderView", "arg":[synsets[hash], vis]});
+			}
+			else {
+				renderView(synsets[e.target.id], vis);
+				$("#synsets > .active").removeClass("active");
+				$("#synsets > #" + e.target.id).addClass("active");
+				pushGuai(e.target.id, {"fn":"renderView", "arg":[synsets[e.target.id], vis]}, true);
+			}
+			// renderView(synsets[e.target.id], vis);
+			// $("#synsets > .active").removeClass("active");
+			// $("#synsets > #" + e.target.id).addClass("active");
+			// pushGuai(e.target.id, {"fn":"renderView", "arg":[synsets[e.target.id], vis]}, true);
 		}
 		e.stopPropagation();
 	});
+
+	// add eventlistener for switcher
+	// $("#settings").off();
+	// $("#settings").on("click", function(e) {
+	// 	console.log(renderView(synsets[e.target.id]))
+	// 	if (e.target !== e.currentTarget) {
+	// 		e.preventDefault();
+	// 		if (e.target.id == "text-rep") {
+	// 			renderView(synsets[e.target.id], "text")
+	// 		}
+	// 		else {
+	// 			renderView(synsets[e.target.id], "graph")
+	// 		}
+	// 	}
+	// 	e.stopPropagation();
+	// });
 
 	// potential to break due to multiple places where wordID is assigned as elID (see elsewhere)
 	$.each(synsets, function(id, synset) {
@@ -212,19 +248,8 @@ function populateHTML(wordID, vis="text", wordsArr) {
 
 		word = wordsObj[wordID]
 
-		// add eventlistener for switcher
-		$("#settings").on("click", function(e) {
-			if (e.target !== e.currentTarget) {
-				e.preventDefault();
-				if (e.target.id == "text-rep") {
-					renderView(word, "text")
-				}
-				else {
-					renderView(word, "graph")
-				}
-			}
-			e.stopPropagation();
-		});
+		pushGuai(wordID, {"fn":"renderView", "arg":[word, vis]}, true)
+		
 
 		// write synsets to sidebar
 		listSynsets(wordsObj, wordID);

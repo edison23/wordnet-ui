@@ -6,14 +6,25 @@ function WNTree(data) {
 	var cons = [];
 	var nodeStack = [];
 
+	function setGraphDimensions(el) {
+		var headerHeight = 0, safetyConstant = 0;
+		if ($(window).width() > 768) {
+			headerHeight = $("#header").height();
+			safetyConstant = 5*(parseFloat($("body").css("font-size")))
+		}
+		console.log(headerHeight, safetyConstant)
+		$(el).css({"width": "100%"})
+		$(el).height($(window).height()-(headerHeight+safetyConstant));
+	}
+
 	function addToNodesAndEdges(name, currentID, parentID, nodeType, edgeType) {
 		switch(nodeType) {
 			case "synset": 
 				points.push({"id": currentID, "label": "synset\n" + name, "group": "synsets"}); 
-				cons.push({"from": parentID, "to": currentID});
+				cons.push({"from": parentID, "to": currentID, "length": 80});
 				break;
 			case "leaf": 
-				points.push({"id": currentID, "label": name});
+				points.push({"id": currentID, "label": name, "group": "leaves"});
 				cons.push({"from": parentID, "to": currentID, "label": "member\nword", "dashes": true});
 				break;
 			case "semGroup": 
@@ -89,6 +100,7 @@ function WNTree(data) {
 
 	// create a network
 	var wntreecontainer = document.getElementById('WNTree');
+	setGraphDimensions(wntreecontainer);
 	var dataVis = {
 	  nodes: nodes,
 	  edges: edges
@@ -107,14 +119,27 @@ function WNTree(data) {
 	            navigationButtons: true,
 	            keyboard: true
 	        },
-	        physics: {
-	            enabled: false,
-	        },
+	        // "edges": {
+	        //     "smooth": {
+	        //       "forceDirection": "none"
+	        //     }
+	        //   },
+	          "physics": {
+	            "barnesHut": {
+	              "avoidOverlap": 1,
+	              "gravitationalConstant": -3300,
+	              "springLength": 150,
+	            },
+	            "minVelocity": 0.75,
+	            "timestep": 0.67
+	          },
 	        nodes: {
 	            shape: 'box',
 	            font: {
 	                size: 14,
-	                color: '#3f3f3f'
+	                color: '#3f3f3f',
+	                strokeWidth: 3, 
+	                strokeColor: 'white'
 	            },
 	            borderWidth: 2,
 	            color: {
@@ -141,18 +166,25 @@ function WNTree(data) {
 	        		font: {
 	        			size: 18
 	        		}
+	        	},
+	        	leaves: {
+	        		font: {
+	        			// color: '#ff00ff',
+	        			strokeWidth: 0,
+	                	// strokeColor: 'black'
+	        		}
 	        	}
 	        },
 	        edges: {
 	        	font: {
 	        		align: 'middle'
 	        	},
-	        	// color: '#3030a9'
+	        	"smooth": {
+	        	  "forceDirection": "none"
+	        	}
 	        }
-	        // edges: {
-	        //     width: 2
-	        // }
 	    };
 	
 	var network = new vis.Network(wntreecontainer, dataVis, options);
+	// network.fit({offset: {x: 1300, y: 300}}); // why doesn't this work
 };

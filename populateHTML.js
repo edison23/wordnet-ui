@@ -1,7 +1,7 @@
 function getData(coalback, input, source) {
 	$.ajax({
-	  // url: "kolo-server.json",
-	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
+	  url: "kolo-server.json",
+	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	  	console.log("https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input)
 	    if (xhr.overrideMimeType)
@@ -25,14 +25,14 @@ function getData(coalback, input, source) {
 
 function onLoad() {
 	// stuff that are needed on document ready
-	$("#text-rep").click(function() {
-    	$("#WNTree").hide();
-        $("#theContent").show();
-    });
-    $("#dendr-rep").click(function() {
-    	$("#theContent").hide();
-    	$("#WNTree").show();
-    });
+	// $("#text-rep").click(function() {
+ //    	$("#WNTree").hide();
+ //        $("#theContent").show();
+ //    });
+ //    $("#dendr-rep").click(function() {
+ //    	$("#theContent").hide();
+ //    	$("#WNTree").show();
+ //    });
 
     $('[data-toggle="tooltip"]').tooltip(); 
 
@@ -61,13 +61,14 @@ function onLoad() {
 		$("#data-source-selection").val(queries["source"])
 	}
 
+	// nothing to search for, show default screen
 	if (! queries["input"]) {
 		hideContent(true)
 		$("#emptySearch").show()
 	}
 	else {
 		$("#search-input").val(queries["input"])
-		search(queries["input"], queries["source"], fragment)
+		search(queries["input"], queries["source"], queries["vis"], fragment)
 	}    
 }
 
@@ -83,8 +84,9 @@ function onSearchButt() {
 		$("#emptySearch").show()
 		return false;
 	}
-	pushGuai(queries, {"fn":"search","arg":[queries['input'], queries['source']]})
-	search(queries['input'], queries['source'], "");
+	pushGuai(queries, {"fn":"search","arg":[queries['input'], queries['source'], queries["vis"], ""]})
+	search(queries['input'], queries['source'], queries["vis"], "");
+	// why is this return false here?
 	return false;
 }
 
@@ -123,11 +125,11 @@ function popGuai(data) {
 
 // show/hide some content and proceed with the ajax call
 // query = str, source = str (with WN ID), wordID = str (with the hash/fragment)
-function search(query, source, wordID) {
+function search(query, source, vis, wordID) {
 	hideContent(true);
 	$("#ajaxLoader").show();
 	$("#search-input").val(query);
-	getData(populateHTML.bind(null, wordID), query, source);
+	getData(populateHTML.bind(null, wordID, vis), query, source);
 }
 
 // hide/show the main content when search, show loader...
@@ -142,6 +144,13 @@ function hideContent(way) {
 		$(".schrodinger").hide()
 		$(".kitty").show()
 	}
+}
+
+function getQueries() {
+	var uri = new URI;
+	return {"blah": "debil"};
+	// return uri.search(true);
+
 }
 
 // write down the list of found synsets
@@ -160,10 +169,12 @@ function listSynsets(synsets, currentID) {
 	$("#synsets").on("click", function(e) {
 		if (e.target !== e.currentTarget) {
 			e.preventDefault();
-			showWord(synsets[e.target.id]);
+			var uri = new URI; //this is rather disgusting way of passing the right parametr from url to function
+			var vis = uri.search(true).vis
+			renderView(synsets[e.target.id], vis);
 			$("#synsets > .active").removeClass("active");
 			$("#synsets > #" + e.target.id).addClass("active");
-			pushGuai(e.target.id, {"fn":"showWord", "arg":[synsets[e.target.id], ""]}, true);
+			pushGuai(e.target.id, {"fn":"renderView", "arg":[synsets[e.target.id], vis]}, true);
 		}
 		e.stopPropagation();
 	});
@@ -181,7 +192,8 @@ function listSynsets(synsets, currentID) {
 // converts returned array to dict, lists synsets in sidebar and then shows word in main
 // wordID = string (with ID, usually empty), wordsArr = arr from ajax
 // why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
-function populateHTML(wordID, wordsArr) {
+function populateHTML(wordID, vis="text", wordsArr) {
+	console.log(vis)
 	// by default, let's display first word
 	
 	if (typeof wordsArr !== 'undefined' && wordsArr.length > 0) {
@@ -198,11 +210,33 @@ function populateHTML(wordID, wordsArr) {
 			wordsObj[word.id] = word;
 		})
 
+		word = wordsObj[wordID]
+
+		// add eventlistener for switcher
+		$("#settings").on("click", function(e) {
+			if (e.target !== e.currentTarget) {
+				e.preventDefault();
+				if (e.target.id == "text-rep") {
+					renderView(word, "text")
+				}
+				else {
+					renderView(word, "graph")
+				}
+			}
+			e.stopPropagation();
+		});
+
 		// write synsets to sidebar
 		listSynsets(wordsObj, wordID);
 
 		// write word details into main
-		showWord(wordsObj[wordID])
+		// showWord(wordsObj[wordID])
+		if (vis == "graph") {
+			renderView(word, "graph")
+		}
+		else {
+			renderView(word, "text")
+		}
 	}
 	else {
 		hideContent(true);
@@ -233,10 +267,25 @@ function synString(synset, linking) {
 	return synString;
 }
 
+function renderView(data, view) {
+	if (view == "text") {
+		$("#WNTree").hide();
+		pushGuai({"vis": "text"}, "", false);
+		showWord(data);
+		$("#theContent").show();
+	}
+	else if (view == "graph") {
+		$("#theContent").hide();
+		pushGuai({"vis": "graph"}, "", false);
+		WNTree(data);
+		$("#WNTree").show();
+	}
+}
+
 // let's show the details of selected word!
 // word = object/dict
 function showWord(word) {
-	WNTree(word);
+	// WNTree(word);
 	$("#wordPOS").html(word.pos);
 	$("#wordID").html("<a href=\"?input=" + word.id + "\" id=\"" + word.id + "\" class=\"synset-links\">" + word.id + "</a>");
 	// $("#wordID").html(word.id);
@@ -247,8 +296,7 @@ function showWord(word) {
 	$("#paths").empty();
 	$("#semGroups > .row").empty();
 	
-	// call to the WNTree which is yet to be made alive again
-	// WNTree(word); //not working
+ 	
 
 	// write the path (breadcrumbs) to the word (this looks a bit to similiar with the synString fc)
 	$.each(word.paths, function(i, path) {
@@ -267,18 +315,16 @@ function showWord(word) {
 		});
 	});
 
-	// event listeren again (for paths)
+	// event listeners
 	// using .one() is a shitty way of going around a problem when the event listeners where being exponentially stuck up on each other resulting in a very annoying amount of ajax requests
 	// btw i have no idea why this kept happening, but God bless .one() and .off() (they might be slightly redundant, but .one() wasn't enough, somethings looping the shit )
 	$("#theContent").off()
 	$("#theContent").on("click", function(e) {
-		console.log("neco se tu sere")
 		if (   e.target.className == "path-item" 
 		    || e.target.className == "synset-links" 
 		    || e.target.className == "list-group-item") {
 			e.preventDefault();
 			var src = $("#data-source-selection").val();
-			console.log("ale proslo to", e.target.id, src)
 			search(e.target.id, src);
 			pushGuai({input: e.target.id, source: src}, {"fn":"search", "arg":[e.target.id, src]}, false)
 		}

@@ -13,7 +13,8 @@
 		<link rel="stylesheet" href="akrobat-webfont/akrobat-font.css">
 		<link rel="stylesheet" href="bootstrap-select.min.css">
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script>
-		<link href="vis-network.min.css" rel="stylesheet" type="text/css" />
+		<link href="http://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" />
+		<link href="vis.min.css" rel="stylesheet" type="text/css" />
 		<style type="text/css" rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"></style>
 
 		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
@@ -21,9 +22,10 @@
 		<script type="text/javascript" src="URI.js"></script>
 		<script type="text/javascript" src="bootstrap-select.min.js"></script>
 
+
 		<!-- <script type="text/javascript" src="jquery.address-1.6.js?autoUpdate=1&history=1&tracker=trackFunction&state=/&strict=0&wrap=1"></script> -->
 		<!-- <script type="text/javascript" src="jquery.URI.js"></script> -->
-		<script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script>
+		<!-- <script type="text/javascript" src="https://d3js.org/d3.v3.js" charset="utf-8"></script> -->
 		<!-- <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script> -->
 		<!-- <script type="text/javascript" src="WNTree.js"></script> -->
 		<script type="text/javascript" src="WNTree_vis.js"></script>
@@ -64,9 +66,9 @@
 
 					<!-- settings buttons -->
 					<div class="" id="settings">
-						<a href="#" id="text-rep" class="btn btn-primary" data-toggle="tooltip" title="Textual"></a>
-						<a href="#" id="dendr-rep" class="btn btn-primary" data-toggle="tooltip" title="Tree"></a>
-						<a href="#" id="about" class="btn btn-primary" data-toggle="tooltip" title="About"></a>
+						<a href="?vis=text" id="text-rep" class="btn btn-primary" data-toggle="tooltip" title="Textual"></a>
+						<a href="?vis=graph" id="dendr-rep" class="btn btn-primary" data-toggle="tooltip" title="Tree"></a>
+						<!-- <a href="#" id="about" class="btn btn-primary" data-toggle="tooltip" title="About"></a> -->
 					</div>
 
 					<form id="search">
@@ -78,7 +80,7 @@
 							<!-- <button id="search-butt" type="submit" class="btn btn-primary" onclick='onSearchButt()'></button> -->
 						</div>
 						<div id="d-src-sel">
-							<select id="data-source-selection" class="selectpickerrrr" title="Select a WordNet to use." >
+							<select id="data-source-selection" title="Select a WordNet to use." >
 								<option value="wncz" selected>Czech wordnet</option>
 								<option value="wneng" selected>English wordnet</option>
 								<option value="wnfre" selected>French wordnet</option>
@@ -106,7 +108,7 @@
 				</div>
 				<div class="col col-sm-12 col-md-8 col-lg-9" id="main">
 					
-					<div id="WNTree">
+					<div id="WNTree" class="kitty">
 						<p>asdfasdfasdf</p>
 						<div id="mynetwork"></div>
 					</div>

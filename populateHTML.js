@@ -1,7 +1,7 @@
 function getData(coalback, input, source) {
 	$.ajax({
-	  url: "kolo-server.json",
-	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
+	  // url: "kolo-server.json",
+	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	  	console.log("https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input)
 	    if (xhr.overrideMimeType)
@@ -13,7 +13,7 @@ function getData(coalback, input, source) {
 	success: coalback,
 	error: function(e, xhr, settings) {
 		
-		console.log("Ajax error")
+		console.log("Ajax error:", e)
 		hideContent(true);
 		$("#ajaxError").show()
 	},
@@ -33,6 +33,22 @@ function onLoad() {
  //    	$("#theContent").hide();
  //    	$("#WNTree").show();
  //    });
+
+ 	// var headerHeight = 0, safetyConstant = 0;
+ 	// if ($(window).width() > 768) {
+ 	// 	headerHeight = $("#header").height() +;
+ 	// 	safetyConstant = 5*(parseFloat($("body").css("font-size")))
+ 	// else {
+
+ 	// }
+
+ 	if ($(window).width() > 768) {
+ 		setElDimensions($("#synsets"))
+ 		setElDimensions($("#theContent"))
+ 		// setElDimensions($("#container"))
+ 		$("#synsets, #theContent").perfectScrollbar();
+ 		// $('#synsets').perfectScrollbar('update');
+ 	}
 
     $('[data-toggle="tooltip"]').tooltip(); 
 
@@ -70,6 +86,16 @@ function onLoad() {
 		$("#search-input").val(queries["input"])
 		search(queries["input"], queries["source"], queries["vis"], fragment)
 	}    
+}
+
+function setElDimensions(el) {
+	var topOffset = 0, safetyConstant = 0;
+	if ($(window).width() > 768) {
+		topOffset = $(el).offset().top;
+		safetyConstant = 1*(parseFloat($("body").css("font-size")))
+	}
+	// $(el).css({"width": "100%"})
+	el.height($(window).height()-(topOffset+safetyConstant));
 }
 
 // run on search button press
@@ -175,15 +201,18 @@ function listSynsets(synsets, currentID) {
 			var uri = new URI; //this is rather disgusting way of passing the right parametr from url to function
 			var vis = uri.search(true).vis
 			var hash = uri.fragment()
-			// the problem here is that setting queries erases the hash...
+			// the problem here is that setting queries erases the hash... -- is it? i dont think so...
 			if (e.target.id == "text-rep") {
-				console.log("hash:" + hash + "; synsets: ", synsets[hash])
-				renderView(synsets[hash], "text")
-				pushGuai({"vis":"text"}, {"fn":"renderView", "arg":[synsets[hash], vis]});
+				if (vis !== "text") {
+					renderView(synsets[hash], "text")
+					pushGuai({"vis":"text"}, {"fn":"renderView", "arg":[synsets[hash], "text"]});
+				}
 			}
 			else if (e.target.id == "dendr-rep") {
-				renderView(synsets[hash], "graph")
-				pushGuai({"vis":"graph"}, {"fn":"renderView", "arg":[synsets[hash], vis]});
+				if (vis !== "graph") {
+					renderView(synsets[hash], "graph")
+					pushGuai({"vis":"graph"}, {"fn":"renderView", "arg":[synsets[hash], "graph"]});
+				}
 			}
 			else {
 				renderView(synsets[e.target.id], vis);
@@ -293,17 +322,17 @@ function synString(synset, linking) {
 }
 
 function renderView(data, view) {
-	if (view == "text") {
+	if (view == "text" || view == undefined) {
 		$("#WNTree").hide();
-		pushGuai({"vis": "text"}, "", false);
-		showWord(data);
+		// pushGuai({"vis": "text"}, "", false);
 		$("#theContent").show();
+		showWord(data);
 	}
 	else if (view == "graph") {
 		$("#theContent").hide();
-		pushGuai({"vis": "graph"}, "", false);
-		WNTree(data);
+		// pushGuai({"vis": "graph"}, "", false);
 		$("#WNTree").show();
+		WNTree(data);
 	}
 }
 

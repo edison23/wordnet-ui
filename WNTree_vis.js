@@ -6,16 +6,7 @@ function WNTree(data) {
 	var cons = [];
 	var nodeStack = [];
 
-	function setGraphDimensions(el) {
-		var headerHeight = 0, safetyConstant = 0;
-		if ($(window).width() > 768) {
-			headerHeight = $("#header").height();
-			safetyConstant = 5*(parseFloat($("body").css("font-size")))
-		}
-		console.log(headerHeight, safetyConstant)
-		$(el).css({"width": "100%"})
-		$(el).height($(window).height()-(headerHeight+safetyConstant));
-	}
+	
 
 	function addToNodesAndEdges(name, currentID, parentID, nodeType, edgeType) {
 		switch(nodeType) {
@@ -99,8 +90,8 @@ function WNTree(data) {
 	var edges = new vis.DataSet(cons);
 
 	// create a network
-	var wntreecontainer = document.getElementById('WNTree');
-	setGraphDimensions(wntreecontainer);
+	var wntreecontainer = document.getElementById('stromcik');
+	setElDimensions($("#stromcik"));
 	var dataVis = {
 	  nodes: nodes,
 	  edges: edges
@@ -126,12 +117,18 @@ function WNTree(data) {
 	        //   },
 	          "physics": {
 	            "barnesHut": {
-	              "avoidOverlap": 1,
+	              "avoidOverlap": 0.8,
 	              "gravitationalConstant": -3300,
 	              "springLength": 150,
 	            },
 	            "minVelocity": 0.75,
-	            "timestep": 0.67
+	            "timestep": 0.9,
+
+				stabilization: {
+                    enabled:true,
+                    iterations:1000,
+                    updateInterval:25
+                }	            
 	          },
 	        nodes: {
 	            shape: 'box',
@@ -187,4 +184,28 @@ function WNTree(data) {
 	
 	var network = new vis.Network(wntreecontainer, dataVis, options);
 	// network.fit({offset: {x: 1300, y: 300}}); // why doesn't this work
+	document.getElementById('loadingBar').style.display = 'block';
+	console.log("loader shown")
+	network.on("stabilizationProgress", function(params) {
+        var parentDim = {w: $("#WNTree").width(), h: $("#WNTree").height()}
+        var minWidth = 20;
+        var maxWidth = parentDim.w-(parentDim.w*0.1);
+        var widthFactor = params.iterations/params.total;
+        var width = Math.max(minWidth,maxWidth * widthFactor);
+
+        $("#loadingBarBar").css({top: parentDim.h/2, left: (parentDim.w/2)-maxWidth/2, width: maxWidth});
+        $("#loadingBarInner").width(width);
+        $("#loadingBarText").html(Math.round(widthFactor*100) + ' %');
+        console.log("stabilization in progress", width, widthFactor, params.total)
+    });
+    network.once("stabilizationIterationsDone", function() {
+    	network.stopSimulation()
+        console.log("stabilization in done")
+
+        $("#loadingBarInner").css({width: "100%"})
+        $("#loadingBarText").html("100 %")
+        $("#loadingBar").fadeOut(300)
+        // really clean the dom element
+        // setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+    });
 };

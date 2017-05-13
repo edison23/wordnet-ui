@@ -12,16 +12,21 @@
 		<!-- <link rel="stylesheet" href="nunito-webfont-2/stylesheet.css"> -->
 		<link rel="stylesheet" href="akrobat-webfont/akrobat-font.css">
 		<link rel="stylesheet" href="bootstrap-select.min.css">
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script>
+		<script type="text/javascript" src="vis.min.js"></script>
+		<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.js"></script> -->
 		<!-- this shit cant be loaded via https bcs of certificate problem, but it somehow doesnt work without remote loading -->
 		<link href="vis-network.min.css" rel="stylesheet" type="text/css" />
+		<!-- <link href="https://visjs.org/dist/vis-network.min.css" rel="stylesheet" type="text/css" /> -->
 		<link href="vis.min.css" rel="stylesheet" type="text/css" />
-		<style type="text/css" rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"></style>
+		<!-- <style type="text/css" rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.19.1/vis.min.css"></style> -->
+		<link href="perfect-scrollbar.css" rel="stylesheet" type="text/css" />
 
 		<!-- <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">  -->
 		<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="URI.js"></script>
 		<script type="text/javascript" src="bootstrap-select.min.js"></script>
+		<script type="text/javascript" src="perfect-scrollbar.js"></script>
+		<script type="text/javascript" src="perfect-scrollbar.jquery.js"></script>
 
 
 		<!-- <script type="text/javascript" src="jquery.address-1.6.js?autoUpdate=1&history=1&tracker=trackFunction&state=/&strict=0&wrap=1"></script> -->
@@ -110,8 +115,13 @@
 				<div class="col col-sm-12 col-md-8 col-lg-9" id="main">
 					
 					<div id="WNTree" class="kitty">
-						<p>asdfasdfasdf</p>
-						<div id="mynetwork"></div>
+						<div id="stromcik"></div>
+						<div id="loadingBar">
+				            <div id="loadingBarText">0 %</div>
+			                <div id="loadingBarBar">
+			                	<div id="loadingBarInner"></div>
+			                </div>
+					    </div>
 					</div>
 					<div id="theContent-alt" class="schrodinger">
 						<div id="ajaxLoader" class="loader stateNote hidden"></div>

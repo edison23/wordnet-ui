@@ -88,6 +88,7 @@ function onLoad() {
 	}    
 }
 
+// converting ems to px: https://chrissilich.com/blog/convert-em-size-to-pixels-with-jquery/
 function setElDimensions(el) {
 	var topOffset = 0, safetyConstant = 0;
 	if ($(window).width() > 768) {
@@ -100,7 +101,9 @@ function setElDimensions(el) {
 
 // run on search button press
 function onSearchButt() {
-	var queries = {};
+	var uri = new URI();
+	var queries = uri.search(true)
+	console.log(queries)
 	queries['input'] = $("#search-input").val();
 	queries['source'] = $("#data-source-selection").val()
 	
@@ -111,6 +114,7 @@ function onSearchButt() {
 		return false;
 	}
 	pushGuai(queries, {"fn":"search","arg":[queries['input'], queries['source'], queries["vis"], ""]})
+	console.log(queries["vis"])
 	search(queries['input'], queries['source'], queries["vis"], "");
 	// why is this return false here?
 	return false;
@@ -148,7 +152,13 @@ function pushGuai(queryMap, data, frag) {
 // data = dict from browser historyAPI
 function popGuai(data) {
 	if (data) {
-		window[data.fn](data.arg[0], data.arg[1])
+		console.log(data.fn, data.arg[0], data.arg[1])
+		if (data.arg[2]) {
+			window[data.fn](data.arg[0], data.arg[1], data.arg[2])
+		}
+		else if (data.arg[1]) {
+			window[data.fn](data.arg[0], data.arg[1])
+		}
 	}
 }
 
@@ -182,6 +192,12 @@ function hideContent(way) {
 
 // }
 
+function updateSynsetList(synsets, target, vis) {
+	renderView(synsets[target], vis);
+	$("#synsets > .active").removeClass("active");
+	$("#synsets > #" + target).addClass("active");
+}
+
 // write down the list of found synsets
 // synsets = dict, currentID = string
 function listSynsets(synsets, currentID) {
@@ -200,25 +216,30 @@ function listSynsets(synsets, currentID) {
 			e.preventDefault();
 			var uri = new URI; //this is rather disgusting way of passing the right parametr from url to function
 			var vis = uri.search(true).vis
-			var hash = uri.fragment()
+			var hash = uri.fragment() ? uri.fragment() : currentID;
+			console.log(hash)
 			// the problem here is that setting queries erases the hash... -- is it? i dont think so...
 			if (e.target.id == "text-rep") {
 				if (vis !== "text") {
 					renderView(synsets[hash], "text")
+					// console.log("vis->text", synsets[hash])
 					pushGuai({"vis":"text"}, {"fn":"renderView", "arg":[synsets[hash], "text"]});
 				}
 			}
 			else if (e.target.id == "dendr-rep") {
 				if (vis !== "graph") {
+					// console.log("vis->graph", synsets[hash])
 					renderView(synsets[hash], "graph")
 					pushGuai({"vis":"graph"}, {"fn":"renderView", "arg":[synsets[hash], "graph"]});
 				}
 			}
 			else {
-				renderView(synsets[e.target.id], vis);
-				$("#synsets > .active").removeClass("active");
-				$("#synsets > #" + e.target.id).addClass("active");
-				pushGuai(e.target.id, {"fn":"renderView", "arg":[synsets[e.target.id], vis]}, true);
+				// renderView(synsets[e.target.id], vis);
+				// $("#synsets > .active").removeClass("active");
+				// $("#synsets > #" + e.target.id).addClass("active");
+				updateSynsetList(synsets, e.target.id, vis)
+				// console.log("kliklo se na synset", vis)
+				pushGuai(e.target.id, {"fn":"updateSynsetList", "arg":[synsets, e.target.id, vis]}, true);
 			}
 			// renderView(synsets[e.target.id], vis);
 			// $("#synsets > .active").removeClass("active");
@@ -258,9 +279,9 @@ function listSynsets(synsets, currentID) {
 // wordID = string (with ID, usually empty), wordsArr = arr from ajax
 // why the fuck are the arguments other way round when called via bind?! (the one from ajax is evidently always last)
 function populateHTML(wordID, vis="text", wordsArr) {
-	console.log(vis)
-	// by default, let's display first word
+	// console.log(vis)
 	
+	// by default, let's display first word
 	if (typeof wordsArr !== 'undefined' && wordsArr.length > 0) {
 		hideContent(false);
 		
@@ -271,13 +292,17 @@ function populateHTML(wordID, vis="text", wordsArr) {
 
 		// convert the array with synsets to object/dick where we can reference the synsets by their ids
 		var wordsObj = {}
+		
 		$.each(wordsArr, function(i, word) {
 			wordsObj[word.id] = word;
 		})
 
+		// number of found synsets (in case we need it)
+		// console.log(Object.keys(wordsObj).length);
+
 		word = wordsObj[wordID]
 
-		pushGuai(wordID, {"fn":"renderView", "arg":[word, vis]}, true)
+		// pushGuai(wordID, {"fn":"renderView", "arg":[word, vis]}, true)
 		
 
 		// write synsets to sidebar

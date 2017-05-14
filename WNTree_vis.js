@@ -26,6 +26,10 @@ function WNTree(data) {
 				points.push({"id": currentID, "label": name, "group": "root"});
 				// cons.push({"from": parentID, "to": currentID, "label": "semantic\nrelationship", "arrows": "to", "width": 3});
 				break
+			case "rootLeaf": 
+				points.push({"id": currentID, "label": name, "group": "rootLeaf"});
+				cons.push({"from": parentID, "to": currentID, "label": "member\nword", "dashes": true});
+				break;
 			default: 
 				points.push({"id": currentID, "label": name});
 				cons.push({"from": parentID, "to": currentID});
@@ -58,7 +62,12 @@ function WNTree(data) {
 		}
 		// leaves
 		else if (obj.name && !obj.children) {
-			addToNodesAndEdges(obj.name, iter, parentI, "leaf", "")
+			if (parentI == 1) {
+				addToNodesAndEdges(obj.name, iter, parentI, "rootLeaf", "")
+			}
+			else {
+				addToNodesAndEdges(obj.name, iter, parentI, "leaf", "")
+			}
 		}
 		else if (obj.children.length > 0) {
 			addToNodesAndEdges(obj.name, iter, parentI, "semGroup", "")
@@ -115,9 +124,9 @@ function WNTree(data) {
 	        //       "forceDirection": "none"
 	        //     }
 	        //   },
-	          "physics": {
+          	"physics": {
 	            "barnesHut": {
-	              "avoidOverlap": 0.8,
+	              "avoidOverlap": 0.99,
 	              "gravitationalConstant": -3300,
 	              "springLength": 150,
 	            },
@@ -129,7 +138,7 @@ function WNTree(data) {
                     iterations:1000,
                     updateInterval:25
                 }	            
-	          },
+	        },
 	        nodes: {
 	            shape: 'box',
 	            font: {
@@ -142,7 +151,20 @@ function WNTree(data) {
 	            color: {
 	            	background: '#d7d7f3',
 	            	border: '#3030a9',
-	            }
+	            },
+	            // i totally dont get this
+	            // scaling: {
+	            //       min: 10,
+	            //       max: 30,
+	            //       label: {
+	            //         enabled: true,
+	            //         min: 14,
+	            //         max: 30,
+	            //         maxVisible: 30,
+	            //         drawThreshold: 5
+	            //       },
+	            // },
+	            
 	        },
 	        groups: {
 	        	synsets: {
@@ -159,9 +181,22 @@ function WNTree(data) {
 	        	root: {
 	        		shape: 'dot',
 	        		size: '8',
-	        		color: 'red',
+	        		color: '#a93030',
 	        		font: {
 	        			size: 18
+	        		}
+	        	},
+	        	rootLeaf: {
+	        		// shape: 'dot',
+	        		// size: '8',
+	        		// color: 'red',
+	        		font: {
+	        			strokeWidth: 0,
+	        			size: 18
+	        		},
+	        		color: {
+	        			background: '#f3d7d7',
+	        			border: '#a93030'
 	        		}
 	        	},
 	        	leaves: {

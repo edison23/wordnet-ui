@@ -1,7 +1,7 @@
 function getData(coalback, input, source) {
 	$.ajax({
-	  // url: "kolo-server.json",
-	  url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
+	  url: "kolo-server.json",
+	  // url: "https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input,
 	  beforeSend: function(xhr){
 	  	console.log("https://nlp.fi.muni.cz/~xrambous/fw/abulafia/" + source + "?action=jsonvis&query=" + input)
 	    if (xhr.overrideMimeType)
@@ -41,6 +41,8 @@ function onLoad() {
  	// else {
 
  	// }
+
+ 	
 
  	if ($(window).width() > 768) {
  		setElDimensions($("#synsets"))
@@ -94,6 +96,7 @@ function setElDimensions(el) {
 	if ($(window).width() > 768) {
 		topOffset = $(el).offset().top;
 		safetyConstant = 1*(parseFloat($("body").css("font-size")))
+		console.log("safety:", safetyConstant, "topo", topOffset, 1*parseFloat($("body").css("font-size")))
 	}
 	// $(el).css({"width": "100%"})
 	el.height($(window).height()-(topOffset+safetyConstant));
@@ -285,11 +288,6 @@ function populateHTML(wordID, vis="text", wordsArr) {
 	if (typeof wordsArr !== 'undefined' && wordsArr.length > 0) {
 		hideContent(false);
 		
-		// this usually means that user hasn't clicked anything in sidebar yet
-		if (!wordID) {
-			wordID = wordsArr[0].id;
-		}
-
 		// convert the array with synsets to object/dick where we can reference the synsets by their ids
 		var wordsObj = {}
 		
@@ -299,6 +297,14 @@ function populateHTML(wordID, vis="text", wordsArr) {
 
 		// number of found synsets (in case we need it)
 		// console.log(Object.keys(wordsObj).length);
+
+		// this usually means that user hasn't clicked anything in sidebar yet
+		// or the ID is invalid for some reason (we should report that)
+		// it's kinda breaking the app anyway, because the id doesnt get pushed to the URL automatically. BUG I guess
+		if (!wordID || !wordsObj[wordID]) {
+			console.log("ID of synset not found or the ID is invalid")
+			wordID = wordsArr[0].id;
+		}
 
 		word = wordsObj[wordID]
 

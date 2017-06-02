@@ -6,9 +6,10 @@ body {
 	font-family: 'akrobat', sans-serif;
 	color: #3f3f3f;
 	padding: 40px;
+	padding-bottom: 0px;
 	/*line-height: 1.3rem;*/
 	font-weight: 400;
-	overflow-y: hidden;
+	/*overflow-y: hidden;*/
 }
 
 #theContent-alt > div {
@@ -223,7 +224,6 @@ sup {
 #WNTree {
 	display: none;
 	width: 100%;
-	height: 800px;
 	position: relative;
 	font-size: 0.8rem;
 }
@@ -272,6 +272,10 @@ sup {
 	background-image: url('svg-icons/search.svg');
 	/*background-size: 1.5rem 1.5rem;*/
 	background-size: 0.9rem 0.9rem;
+}
+
+.no-style {
+	display: none;
 }
 
 .btn#search-butt:hover {

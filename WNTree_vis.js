@@ -46,7 +46,7 @@ function WNTree(data) {
 		
 	}
 
-	function BFSThruSynsets(obj, parentI) {
+	function DFSThruSynsets(obj, parentI) {
 		iter++;
 
 		// this means it's a synset, not a group name (eg. meronyms) or a leaf word
@@ -87,13 +87,23 @@ function WNTree(data) {
 			});
 		};
 
+		// recursion, yay!
 		if (nodeStack[0]) {
 			out = nodeStack.pop();
-			BFSThruSynsets(out.obj, out.parentI)
+			console.log(nodeStack)
+			DFSThruSynsets(out.obj, out.parentI)
 		}
 	};
 
-	BFSThruSynsets(data, iter);
+	DFSThruSynsets(data, iter);
+
+	// non-recursive implementation
+	// nodeStack.push({obj: data, parentI: 0})
+	// while (nodeStack[0]) {
+	// 	console.log(nodeStack)
+	// 	out = nodeStack.shift()
+	// 	BFSThruSynsets(out.obj, out.parentI)
+	// }
 
 	var nodes = new vis.DataSet(points);
 	var edges = new vis.DataSet(cons);
@@ -127,9 +137,12 @@ function WNTree(data) {
           	"physics": {
 	            "barnesHut": {
 	              "avoidOverlap": 0.99,
-	              "gravitationalConstant": -3300,
-	              "springLength": 150,
+	              "gravitationalConstant": -2300,
+	              // "springLength": 50,
 	            },
+	            // "hierarchicalRepulsion": {
+	            // 	"damping": 0.09
+	            // },
 	            "minVelocity": 0.75,
 	            "timestep": 0.9,
 
@@ -145,7 +158,8 @@ function WNTree(data) {
 	                size: 14,
 	                color: '#3f3f3f',
 	                strokeWidth: 3, 
-	                strokeColor: 'white'
+	                strokeColor: 'white',
+	                face: 'akrobat'
 	            },
 	            borderWidth: 2,
 	            color: {
@@ -155,13 +169,13 @@ function WNTree(data) {
 	            // i totally dont get this
 	            // scaling: {
 	            //       min: 10,
-	            //       max: 30,
+	            //       max: 50,
 	            //       label: {
-	            //         enabled: true,
+	            //         enabled: false,
 	            //         min: 14,
-	            //         max: 30,
-	            //         maxVisible: 30,
-	            //         drawThreshold: 5
+	            //         max: 20,
+	            //         maxVisible: 20,
+	            //         drawThreshold: 10
 	            //       },
 	            // },
 	            
@@ -209,7 +223,8 @@ function WNTree(data) {
 	        },
 	        edges: {
 	        	font: {
-	        		align: 'middle'
+	        		align: 'middle',
+	                face: 'akrobat'
 	        	},
 	        	"smooth": {
 	        	  "forceDirection": "none"
@@ -220,7 +235,7 @@ function WNTree(data) {
 	var network = new vis.Network(wntreecontainer, dataVis, options);
 	// network.fit({offset: {x: 1300, y: 300}}); // why doesn't this work
 	document.getElementById('loadingBar').style.display = 'block';
-	console.log("loader shown")
+	// console.log("loader shown")
 	network.on("stabilizationProgress", function(params) {
         var parentDim = {w: $("#WNTree").width(), h: $("#WNTree").height()}
         var minWidth = 20;
@@ -231,11 +246,11 @@ function WNTree(data) {
         $("#loadingBarBar").css({top: parentDim.h/2, left: (parentDim.w/2)-maxWidth/2, width: maxWidth});
         $("#loadingBarInner").width(width);
         $("#loadingBarText").html(Math.round(widthFactor*100) + ' %');
-        console.log("stabilization in progress", width, widthFactor, params.total)
+        // console.log("stabilization in progress", width, widthFactor, params.total)
     });
     network.once("stabilizationIterationsDone", function() {
     	network.stopSimulation()
-        console.log("stabilization in done")
+        // console.log("stabilization in done")
 
         $("#loadingBarInner").css({width: "100%"})
         $("#loadingBarText").html("100 %")
